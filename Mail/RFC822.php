@@ -418,6 +418,7 @@ class Mail_RFC822 {
     function _validateAddress($address)
     {
         $is_group = false;
+        $addresses = array();
 
         if ($address['group']) {
             $is_group = true;
@@ -458,7 +459,7 @@ class Mail_RFC822 {
         // Check that $addresses is set, if address like this:
         // Groupname:;
         // Then errors were appearing.
-        if (!isset($addresses)){
+        if (!count($addresses)){
             $this->error = 'Empty group.';
             return false;
         }
@@ -847,6 +848,7 @@ class Mail_RFC822 {
     function _validateLocalPart($local_part)
     {
         $parts = explode('.', $local_part);
+        $words = array();
 
         // Split the local_part into words.
         while (count($parts) > 0){
@@ -902,5 +904,5 @@ class Mail_RFC822 {
             return false;
         }
     }
+
 }
-?>
