@@ -117,6 +117,12 @@ class Mail_smtp extends Mail {
         
         if ($this->auth) {
             if (PEAR::isError($smtp->auth($this->username, $this->password))) { return new PEAR_Error('unable to authenticate to smtp server'); }
+
+            /*
+             * XXX  This call to identifySender() is not needed by Net_SMTP
+             *      1.1.0 or later.  Once that version of Net_SMTP reaches a
+             *      critical installed base, this line should be removed.
+             */
             if (PEAR::isError($smtp->identifySender())) { return new PEAR_Error('unable to identify smtp server'); }
         }
         
