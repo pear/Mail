@@ -186,7 +186,8 @@ class Mail_RFC822 {
         }
         
         if ($this->address === false || isset($this->error)) {
-            return $this->raiseError($this->error);
+            require_once 'PEAR.php';
+            return PEAR::raiseError($this->error);
         }
 
         // Loop through all the addresses
@@ -194,7 +195,8 @@ class Mail_RFC822 {
 
             if (($return = $this->_validateAddress($this->addresses[$i])) === false
                 || isset($this->error)) {
-                return $this->raiseError($this->error);
+                require_once 'PEAR.php';
+                return PEAR::raiseError($this->error);
             }
             
             if (!$this->nestGroups) {
