@@ -595,6 +595,7 @@ class Mail_RFC822 {
         // A couple of defaults.
         $phrase  = '';
         $comment = '';
+        $comments = array();
 
         // Catch any RFC822 comments and store them separately
         $_mailbox = $mailbox;
@@ -615,7 +616,7 @@ class Mail_RFC822 {
             }
         }
 
-        for($i=0; $i<count(@$comments); $i++){
+        for($i=0; $i<count($comments); $i++){
             $mailbox = str_replace('('.$comments[$i].')', '', $mailbox);
         }
         $mailbox = trim($mailbox);
