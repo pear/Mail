@@ -124,7 +124,12 @@ class Mail_sendmail extends Mail {
             fputs($mail, $text_headers);
             fputs($mail, $this->sep);  // newline to end the headers section
             fputs($mail, $body);
-            $result = pclose($mail) >> 8 & 0xFF; // need to shift the pclose result to get the exit code
+            $result = pclose($mail);
+            if (version_compare(phpversion(), '4.2.3') == -1) {
+                // With older php versions, we need to shift the
+                // pclose result to get the exit code.
+                $result = $result >> 8 & 0xFF;
+            }
         } else {
             return PEAR::raiseError('sendmail [' . $this->sendmail_path . '] is not a valid file');
         }
