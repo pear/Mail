@@ -80,6 +80,13 @@ class Mail_smtp extends Mail {
     var $verp = false;
 
     /**
+     * Turn on Net_SMTP debugging?
+     *
+     * @var boolean $debug
+     */
+    var $debug = false;
+
+    /**
      * Constructor.
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
@@ -91,6 +98,7 @@ class Mail_smtp extends Mail {
      *     password    The password to use for SMTP auth. No default.
      *     localhost   The local hostname / domain. Defaults to localhost.
      *     verp        Whether to use VERP or not. Defaults to false.
+     *     debug       Activate SMTP debug mode? Defaults to false.
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
@@ -108,6 +116,7 @@ class Mail_smtp extends Mail {
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
         if (isset($params['verp'])) $this->verp = $params['verp'];
+        if (isset($params['debug'])) $this->debug = (boolean)$params['debug'];
     }
 
     /**
@@ -138,8 +147,12 @@ class Mail_smtp extends Mail {
     {
         include_once 'Net/SMTP.php';
 
-        if (!($smtp = new Net_SMTP($this->host, $this->port, $this->localhost))) {
+        if (!($smtp = &new Net_SMTP($this->host, $this->port, $this->localhost))) {
             return PEAR::raiseError('unable to instantiate Net_SMTP object');
+        }
+
+        if ($this->debug) {
+            $smtp->setDebug(true);
         }
 
         if (PEAR::isError($smtp->connect())) {
