@@ -27,7 +27,29 @@ require_once ('Mail.php');
  * @version $Revision$
  */
  
- class Mail_mail extends Mail {
+class Mail_mail extends Mail {
+
+    /**
+     * Any arguments to pass to the mail() function.
+     * @var string
+     */
+    var $_params = '';
+
+    /**
+     * Constructor.
+     *
+     * Instantiates a new Mail_mail:: object based on the parameters
+     * passed in.
+     *
+     * @param string $params Extra arguments for the mail() function.
+     *
+     * @access public
+     */
+    function Mail_mail($params = '')
+    {
+        $this->_params = $params;
+    }
+
 	/**
      * Implements Mail_mail::send() function using php's built-in mail()
      * command.
@@ -59,7 +81,7 @@ require_once ('Mail.php');
         if (is_array($recipients)) {
             $recipients = implode(', ', $recipients);
         }
-        
+
         // get the Subject out of the headers array so that we can
         // pass it as a seperate argument to mail().
         $subject = '';
@@ -67,11 +89,11 @@ require_once ('Mail.php');
             $subject = $headers['Subject'];
             unset($headers['Subject']);
         }
-        
+
         // flatten the headers out.
         list(,$text_headers) = Mail::prepareHeaders($headers);
-        
-        return mail($recipients, $subject, $body, $text_headers);
+
+        return mail($recipients, $subject, $body, $text_headers, $this->_params);
     }
-    
+
 }
