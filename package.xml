@@ -26,12 +26,19 @@ sendmail and SMTP. This package also provides a RFC 822 Email address list valid
       <name>Richard Heyes</name>
       <email>richard@phpguru.org</email>
     </maintainer>
+
+    <maintainer>
+      <user>jon</user>
+      <role>developer</role>
+      <name>Jon Parise</name>
+      <email>jon@php.net</email>
+    </maintainer>
   </maintainers>
 
   <release>
-    <version>1.0.2</version>
-    <date>2002-07-27</date>
-    <notes>Minor additions and changes to RFC822.php. Fixed line terminator issue for smtp.php and set smtp.php to use Return-Path header in place of From header for MAIL FROM: (if supplied)</notes>
+    <version>1.X.X</version>
+    <date>2003-XX-XX</date>
+    <notes>The Mail package now depends on Net_SMTP 1.1.0 or greater for its SMTP authentication capabilities.</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" role="php">
@@ -45,11 +52,17 @@ sendmail and SMTP. This package also provides a RFC 822 Email address list valid
         </dir>
     </filelist>
     <deps>
-      <dep type="pkg" rel="has">Net_SMTP</dep>
+      <dep type="pkg" rel="ge" version="1.1.0">Net_SMTP</dep>
     </deps>
   </release>
 
   <changelog>
+    <release>
+      <version>1.0.2</version>
+      <date>2002-07-27</date>
+      <notes>Minor additions and changes to RFC822.php. Fixed line terminator issue for smtp.php and set smtp.php to use Return-Path header in place of From header for MAIL FROM: (if supplied)</notes>
+      <state>stable</state>
+    </release>
 
     <release>
       <version>1.0.1</version>

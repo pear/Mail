@@ -13,7 +13,8 @@
 // | obtain it through the world-wide-web, please send a note to          |
 // | license@php.net so we can mail you a copy immediately.               |
 // +----------------------------------------------------------------------+
-// | Author: Chuck Hagenbuch <chuck@horde.org>                            |
+// | Authors: Chuck Hagenbuch <chuck@horde.org>                           |
+// |          Jon Parise <jon@php.net>                                    |
 // +----------------------------------------------------------------------+
 
 require_once 'Mail.php';
@@ -129,13 +130,6 @@ class Mail_smtp extends Mail {
                               $method))) {
                 return new PEAR_Error('unable to authenticate to smtp server');
             }
-
-            /*
-             * XXX  This call to identifySender() is not needed by Net_SMTP
-             *      1.1.0 or later.  Once that version of Net_SMTP reaches a
-             *      critical installed base, this line should be removed.
-             */
-            if (PEAR::isError($smtp->identifySender())) { return new PEAR_Error('unable to identify smtp server'); }
         }
 
         list($from, $text_headers) = $this->prepareHeaders($headers);
