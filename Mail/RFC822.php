@@ -616,9 +616,10 @@ class Mail_RFC822 {
             }
         }
 
-        for($i=0; $i<count($comments); $i++){
-            $mailbox = str_replace('('.$comments[$i].')', '', $mailbox);
+        foreach ($comments as $comment) {
+            $mailbox = str_replace("($comment)", '', $mailbox);
         }
+
         $mailbox = trim($mailbox);
 
         // Check for name + route-addr
