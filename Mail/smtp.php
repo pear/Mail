@@ -40,8 +40,15 @@ class Mail_smtp extends Mail {
     var $port = 25;
 
     /**
-     * Whether or not to attempt to authenticate to the SMTP server.
-     * @var boolean
+     * Should SMTP authentication be used?
+     *
+     * This value may be set to true, false or the name of a specific
+     * authentication method.
+     *
+     * If the value is set to true, the Net_SMTP package will attempt to use
+     * the best authentication method advertised by the remote SMTP server.
+     *
+     * @var mixed
      */
     var $auth = false;
 
@@ -64,7 +71,7 @@ class Mail_smtp extends Mail {
      * passed in. It looks for the following parameters:
      *     host        The server to connect to. Defaults to localhost.
      *     port        The port to connect to. Defaults to 25.
-     *     auth        Whether or not to use SMTP auth. Defaults to false.
+     *     auth        SMTP authentication.  Defaults to none.
      *     username    The username to use for SMTP auth. No default.
      *     password    The password to use for SMTP auth. No default.
      *
@@ -116,7 +123,12 @@ class Mail_smtp extends Mail {
         if (PEAR::isError($smtp->connect())) { return new PEAR_Error('unable to connect to smtp server ' . $this->host . ':' . $this->port); }
 
         if ($this->auth) {
-            if (PEAR::isError($smtp->auth($this->username, $this->password))) { return new PEAR_Error('unable to authenticate to smtp server'); }
+            $method = is_string($this->auth) ? $this->auth : '';
+
+            if (PEAR::isError($smtp->auth($this->username, $this->password,
+                              $method))) {
+                return new PEAR_Error('unable to authenticate to smtp server');
+            }
 
             /*
              * XXX  This call to identifySender() is not needed by Net_SMTP
