@@ -66,6 +66,14 @@ class Mail_smtp extends Mail {
     var $password = '';
 
     /**
+     * Hostname or domain that will be sent to the remote SMTP server in the
+     * HELO / EHLO message.
+     *
+     * @var string
+     */
+    var $localhost = 'localhost';
+
+    /**
      * Constructor.
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
@@ -75,6 +83,7 @@ class Mail_smtp extends Mail {
      *     auth        SMTP authentication.  Defaults to none.
      *     username    The username to use for SMTP auth. No default.
      *     password    The password to use for SMTP auth. No default.
+     *     localhost   The local hostname / domain. Defaults to localhost.
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
@@ -90,6 +99,7 @@ class Mail_smtp extends Mail {
         if (isset($params['auth'])) $this->auth = $params['auth'];
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
+        if (isset($params['localhost'])) $this->localhost = $params['localhost'];
     }
 
     /**
@@ -120,7 +130,7 @@ class Mail_smtp extends Mail {
     {
         include_once 'Net/SMTP.php';
 
-        if (!($smtp = new Net_SMTP($this->host, $this->port))) {
+        if (!($smtp = new Net_SMTP($this->host, $this->port, $this->localhost))) {
             return new PEAR_Error('unable to instantiate Net_SMTP object');
         }
 

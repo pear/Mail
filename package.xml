@@ -32,9 +32,9 @@
   </maintainers>
 
   <release>
-    <version>1.1.1</version>
-    <date>2003-06-26</date>
-    <notes>Minor fixes with newlines in headers.</notes>
+    <version>1.1.2</version>
+    <date>2003-??-??</date>
+    <notes>The 'localhost' value can now be set in the SMTP driver.</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" role="php">
