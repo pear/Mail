@@ -29,7 +29,7 @@ require_once 'PEAR.php';
  * @version $Revision$
  * @package Mail
  */
-class Mail extends PEAR
+class Mail
 {
     /**
      * Provides an interface for generating Mail:: objects of various
