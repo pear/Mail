@@ -36,7 +36,7 @@
     <date>2004-04-08</date>
     <notes>
 - The 'mail' driver now returns a PEAR_Error object on failure.
-- The individual drivers now longer include the 'Mail.php' file.  If you want to instantiate a driver directly, you'll need to explicitly include the 'Mail.php' file yourself.
+- The individual drivers no longer include the 'Mail.php' file.  If you want to instantiate a driver directly, you'll need to explicitly include the 'Mail.php' file yourself.
     </notes>
     <state>stable</state>
     <filelist>
