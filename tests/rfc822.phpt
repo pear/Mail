@@ -14,6 +14,15 @@ print_r($parser->parseAddressList($address, null, true, true));
 $address = 'My Group: "Richard" <richard@localhost> (A comment), ted@example.com (Ted Bloggs), Barney;';
 print_r($parser->parseAddressList($address, null, true, true));
 
+/* A valid address with spaces in the local part. */
+$address = '<"Jon Parise"@php.net>';
+print_r($parser->parseAddressList($address, null, true, true));
+
+/* An invalid address with spaces in the local part. */
+$address = '<Jon Parise@php.net>';
+$result = $parser->parseAddressList($address, null, true, true);
+if (PEAR::isError($result)) echo $result->getMessage() . "\n";
+
 --EXPECT--
 Array
 (
@@ -76,3 +85,18 @@ Array
         )
 
 )
+Array
+(
+    [0] => stdClass Object
+        (
+            [personal] => 
+            [comment] => Array
+                (
+                )
+
+            [mailbox] => "Jon Parise"
+            [host] => php.net
+        )
+
+)
+Validation failed for "<Jon Parise@php.net>"
