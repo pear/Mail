@@ -36,6 +36,7 @@
     <date>200?-??-??</date>
     <notes>
 - Unfold long lines before parsing addresses in Mail_RFC822.
+- The SMTP driver now supports a 'timeout' value. (Request #3776)
     </notes>
     <state>stable</state>
 

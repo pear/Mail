@@ -72,6 +72,13 @@ class Mail_smtp extends Mail {
     var $localhost = 'localhost';
 
     /**
+     * SMTP connection timeout value.  NULL indicates no timeout.
+     *
+     * @var integer
+     */
+    var $timeout = null;
+
+    /**
      * Whether to use VERP or not. If not a boolean, the string value
      * will be used as the VERP separators.
      *
@@ -97,6 +104,7 @@ class Mail_smtp extends Mail {
      *     username    The username to use for SMTP auth. No default.
      *     password    The password to use for SMTP auth. No default.
      *     localhost   The local hostname / domain. Defaults to localhost.
+     *     timeout     The SMTP connection timeout. Defaults to none.
      *     verp        Whether to use VERP or not. Defaults to false.
      *     debug       Activate SMTP debug mode? Defaults to false.
      *
@@ -115,6 +123,7 @@ class Mail_smtp extends Mail {
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
+        if (isset($params['timeout'])) $this->localhost = $params['timeout'];
         if (isset($params['verp'])) $this->verp = $params['verp'];
         if (isset($params['debug'])) $this->debug = (boolean)$params['debug'];
     }
@@ -155,7 +164,7 @@ class Mail_smtp extends Mail {
             $smtp->setDebug(true);
         }
 
-        if (PEAR::isError($smtp->connect())) {
+        if (PEAR::isError($smtp->connect($this->timeout))) {
             return PEAR::raiseError('unable to connect to smtp server ' .
                                     $this->host . ':' . $this->port);
         }
