@@ -474,7 +474,7 @@ class Mail_RFC822 {
         for ($i = 0; $i < count($addresses); $i++) {
             if (!$this->validateMailbox($addresses[$i])) {
                 if (empty($this->error)) {
-                    $this->error = 'Validation failed for "' . $addresses[$i] . '"';
+                    $this->error = 'Validation failed for: ' . $addresses[$i];
                 }
                 return false;
             }
