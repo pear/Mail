@@ -140,7 +140,7 @@ class Mail_smtp extends Mail {
             if (PEAR::isError($res = $smtp->rcptTo($recipient))) { return new PEAR_Error('unable to add recipient [' . $recipient . ']: ' . $res->getMessage()); }
         }
 		
-        if (PEAR::isError($smtp->data($text_headers . "\n" . $body))) { return new PEAR_Error('unable to send data'); }
+        if (PEAR::isError($smtp->data($text_headers . "\r\n" . $body))) { return new PEAR_Error('unable to send data'); }
         
         $smtp->disconnect();
         return true;
