@@ -144,7 +144,7 @@ class Mail_smtp extends Mail {
 
         if (PEAR::isError($smtp->connect())) {
             return PEAR::raiseError('unable to connect to smtp server ' .
-                                  $this->host . ':' . $this->port);
+                                    $this->host . ':' . $this->port);
         }
 
         if ($this->auth) {
