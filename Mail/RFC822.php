@@ -186,18 +186,20 @@ class Mail_RFC822 {
             return PEAR::raiseError($this->error);
         }
 
-        // Loop through all the addresses
-        for ($i = 0; $i < count($this->addresses); $i++) {
-            if (($return = $this->_validateAddress($this->addresses[$i])) === false
-                || isset($this->error)) {
+        // Validate each address individually.  If we encounter an invalid
+        // address, stop iterating and return an error immediately.
+        foreach ($this->addresses as $address) {
+            $valid = $this->_validateAddress($address);
+
+            if ($valid === false || isset($this->error)) {
                 require_once 'PEAR.php';
                 return PEAR::raiseError($this->error);
             }
 
             if (!$this->nestGroups) {
-                $this->structure = array_merge($this->structure, $return);
+                $this->structure = array_merge($this->structure, $valid);
             } else {
-                $this->structure[] = $return;
+                $this->structure[] = $valid;
             }
         }
 
@@ -213,7 +215,7 @@ class Mail_RFC822 {
      */
     function _splitAddresses($address)
     {
-        if (!empty($this->limit) AND count($this->addresses) == $this->limit) {
+        if (!empty($this->limit) && count($this->addresses) == $this->limit) {
             return '';
         }
 
@@ -459,13 +461,15 @@ class Mail_RFC822 {
             return false;
         }
 
+        // Trim the whitespace from all of the address strings.
+        array_map('trim', $addresses);
+
         // Validate each mailbox.
         // Format could be one of: name <geezer@domain.com>
         //                         geezer@domain.com
         //                         geezer
         // ... or any other format valid by RFC 822.
         for ($i = 0; $i < count($addresses); $i++) {
-            $addresses[$i] = trim($addresses[$i]);
             if (!$this->validateMailbox($addresses[$i])) {
                 if (empty($this->error)) {
                     $this->error = 'Validation failed for "' . $addresses[$i] . '"';
@@ -513,17 +517,17 @@ class Mail_RFC822 {
                 array_shift($parts);
         }
 
-        for ($i = 0; $i < count($phrase_parts); $i++) {
+        foreach ($phrase_parts as $part) {
             // If quoted string:
-            if (substr($phrase_parts[$i], 0, 1) == '"') {
-                if (!$this->_validateQuotedString($phrase_parts[$i])) {
+            if (substr($part, 0, 1) == '"') {
+                if (!$this->_validateQuotedString($part)) {
                     return false;
                 }
                 continue;
             }
 
             // Otherwise it's an atom:
-            if (!$this->_validateAtom($phrase_parts[$i])) return false;
+            if (!$this->_validateAtom($part)) return false;
         }
 
         return true;
@@ -737,9 +741,9 @@ class Mail_RFC822 {
         // Split on comma.
         $domains = explode(',', trim($route));
 
-        for ($i = 0; $i < count($domains); $i++) {
-            $domains[$i] = str_replace('@', '', trim($domains[$i]));
-            if (!$this->_validateDomain($domains[$i])) return false;
+        foreach ($domains as $domain) {
+            $domain = str_replace('@', '', trim($domain));
+            if (!$this->_validateDomain($domain)) return false;
         }
 
         return $route;
@@ -766,8 +770,8 @@ class Mail_RFC822 {
                 array_shift($subdomains);
         }
 
-        for ($i = 0; $i < count($sub_domains); $i++) {
-            if (!$this->_validateSubdomain(trim($sub_domains[$i])))
+        foreach ($sub_domains as $sub_domain) {
+            if (!$this->_validateSubdomain(trim($sub_domain)))
                 return false;
         }
 
@@ -862,8 +866,8 @@ class Mail_RFC822 {
         }
 
         // Validate each word.
-        for ($i = 0; $i < count($words); $i++) {
-            if ($this->_validatePhrase(trim($words[$i])) === false) return false;
+        foreach ($words as $word) {
+            if ($this->_validatePhrase(trim($word)) === false) return false;
         }
 
         // Managed to get here, so return the input.
