@@ -130,9 +130,12 @@ class Mail
         foreach ($headers as $key => $value) {
             if (strcasecmp($key, 'From') === 0) {
                 include_once 'Mail/RFC822.php';
+                $parser = &new Mail_RFC822();
+                $addresses = $parser->parseAddressList($value, 'localhost', false);
+                if (PEAR::isError($addresses)) {
+                    return $addresses;
+                }
 
-                $addresses = Mail_RFC822::parseAddressList($value, 'localhost',
-                                                           false);
                 $from = $addresses[0]->mailbox . '@' . $addresses[0]->host;
 
                 // Reject envelope From: addresses with spaces.
@@ -196,4 +199,3 @@ class Mail
     }
 
 }
-?>

@@ -34,29 +34,28 @@
 // +-----------------------------------------------------------------------+
 
 /**
-* RFC 822 Email address list validation Utility
-*
-* What is it?
-*
-* This class will take an address string, and parse it into it's consituent
-* parts, be that either addresses, groups, or combinations. Nested groups
-* are not supported. The structure it returns is pretty straight forward,
-* and is similar to that provided by the imap_rfc822_parse_adrlist(). Use
-* print_r() to view the structure.
-*
-* How do I use it?
-*
-* $address_string = 'My Group: "Richard" <richard@localhost> (A comment), ted@example.com (Ted Bloggs), Barney;';
-* $structure = Mail_RFC822::parseAddressList($address_string, 'example.com', true)
-* print_r($structure);
-*
-* @author  Richard Heyes <richard@phpguru.org>
-* @author  Chuck Hagenbuch <chuck@horde.org>
-* @version $Revision$
-* @license BSD
-* @package Mail
-*/
-
+ * RFC 822 Email address list validation Utility
+ *
+ * What is it?
+ *
+ * This class will take an address string, and parse it into it's consituent
+ * parts, be that either addresses, groups, or combinations. Nested groups
+ * are not supported. The structure it returns is pretty straight forward,
+ * and is similar to that provided by the imap_rfc822_parse_adrlist(). Use
+ * print_r() to view the structure.
+ *
+ * How do I use it?
+ *
+ * $address_string = 'My Group: "Richard" <richard@localhost> (A comment), ted@example.com (Ted Bloggs), Barney;';
+ * $structure = Mail_RFC822::parseAddressList($address_string, 'example.com', true)
+ * print_r($structure);
+ *
+ * @author  Richard Heyes <richard@phpguru.org>
+ * @author  Chuck Hagenbuch <chuck@horde.org>
+ * @version $Revision$
+ * @license BSD
+ * @package Mail
+ */
 class Mail_RFC822 {
 
     /**
@@ -127,7 +126,6 @@ class Mail_RFC822 {
     */
     var $limit = null;
 
-
     /**
      * Sets up the object. The address must either be set here or when
      * calling parseAddressList(). One or the other.
@@ -148,7 +146,6 @@ class Mail_RFC822 {
         if (isset($validate))       $this->validate       = $validate;
         if (isset($limit))          $this->limit          = $limit;
     }
-
 
     /**
      * Starts the whole process. The address must either be set here
@@ -216,7 +213,6 @@ class Mail_RFC822 {
      */
     function _splitAddresses($address)
     {
-
         if (!empty($this->limit) AND count($this->addresses) == $this->limit) {
             return '';
         }
@@ -875,33 +871,33 @@ class Mail_RFC822 {
     }
 
     /**
-    * Returns an approximate count of how many addresses are
-    * in the given string. This is APPROXIMATE as it only splits
-    * based on a comma which has no preceding backslash. Could be
-    * useful as large amounts of addresses will end up producing
-    * *large* structures when used with parseAddressList().
-    *
-    * @param  string $data Addresses to count
-    * @return int          Approximate count
-    */
+     * Returns an approximate count of how many addresses are in the
+     * given string. This is APPROXIMATE as it only splits based on a
+     * comma which has no preceding backslash. Could be useful as
+     * large amounts of addresses will end up producing *large*
+     * structures when used with parseAddressList().
+     *
+     * @param  string $data Addresses to count
+     * @return int          Approximate count
+     */
     function approximateCount($data)
     {
         return count(preg_split('/(?<!\\\\),/', $data));
     }
 
     /**
-    * This is a email validating function separate to the rest
-    * of the class. It simply validates whether an email is of
-    * the common internet form: <user>@<domain>. This can be
-    * sufficient for most people. Optional stricter mode can
-    * be utilised which restricts mailbox characters allowed
-    * to alphanumeric, full stop, hyphen and underscore.
-    *
-    * @param  string  $data   Address to check
-    * @param  boolean $strict Optional stricter mode
-    * @return mixed           False if it fails, an indexed array
-    *                         username/domain if it matches
-    */
+     * This is a email validating function separate to the rest of the
+     * class. It simply validates whether an email is of the common
+     * internet form: <user>@<domain>. This can be sufficient for most
+     * people. Optional stricter mode can be utilised which restricts
+     * mailbox characters allowed to alphanumeric, full stop, hyphen
+     * and underscore.
+     *
+     * @param  string  $data   Address to check
+     * @param  boolean $strict Optional stricter mode
+     * @return mixed           False if it fails, an indexed array
+     *                         username/domain if it matches
+     */
     function isValidInetAddress($data, $strict = false)
     {
         $regex = $strict ? '/^([.0-9a-z_-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i' : '/^([*+!.&#$|\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,4})$/i';

@@ -23,8 +23,8 @@
  * @package Mail
  * @version $Revision$
  */
-class Mail_mail extends Mail
-{
+class Mail_mail extends Mail {
+
     /**
      * Any arguments to pass to the mail() function.
      * @var string
