@@ -25,7 +25,7 @@
 
     <maintainer>
       <user>jon</user>
-      <role>developer</role>
+      <role>lead</role>
       <name>Jon Parise</name>
       <email>jon@php.net</email>
     </maintainer>
@@ -33,7 +33,7 @@
 
   <release>
     <version>1.1.2</version>
-    <date>2003-??-??</date>
+    <date>2003-09-04</date>
     <notes>The 'localhost' value can now be set in the SMTP driver.</notes>
     <state>stable</state>
     <filelist>
