@@ -63,7 +63,7 @@ class Mail_mail extends Mail
          * arguments, we can't guarantee the use of the standard "\r\n"
          * separator.  Instead, we use the system's native line separator.
          */
-        $this->sep = OS_WINDOWS ? "\r\n" : "\n";
+        $this->sep = (strstr(PHP_OS, 'WIN')) ? "\r\n" : "\n";
     }
 
 	/**
