@@ -102,8 +102,8 @@ class Mail_smtp extends Mail {
      *
      * @param array $headers The array of headers to send with the mail, in an
      *              associative array, where the array key is the
-     *              header name (ie, 'Subject'), and the array value
-     *              is the header value (ie, 'test'). The header
+     *              header name (e.g., 'Subject'), and the array value
+     *              is the header value (e.g., 'test'). The header
      *              produced from those values would be 'Subject:
      *              test'.
      *
