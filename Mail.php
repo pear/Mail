@@ -128,7 +128,7 @@ class Mail
         $from = null;
 
         foreach ($headers as $key => $value) {
-            if ($key === 'From') {
+            if (strcasecmp($key, 'From') === 0) {
                 include_once 'Mail/RFC822.php';
 
                 $addresses = Mail_RFC822::parseAddressList($value, 'localhost',
@@ -141,7 +141,7 @@ class Mail
                 }
 
                 $lines[] = $key . ': ' . $value;
-            } elseif ($key === 'Received') {
+            } elseif (strcasecmp($key, 'Received') === 0) {
                 // Put Received: headers at the top.  Spam detectors often
                 // flag messages with Received: headers after the Subject:
                 // as spam.
