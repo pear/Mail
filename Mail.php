@@ -151,7 +151,7 @@ class Mail
             }
         }
 
-        return array($from, join($this->sep, $lines));
+        return array($from, join($this->sep, $lines) . $this->sep);
     }
 
     /**
