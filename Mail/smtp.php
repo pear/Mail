@@ -192,10 +192,14 @@ class Mail_smtp extends Mail {
         }
 
         $recipients = $this->parseRecipients($recipients);
-        foreach($recipients as $recipient) {
+        if (PEAR::isError($recipients)) {
+            return $recipients;
+        }
+
+        foreach ($recipients as $recipient) {
             if (PEAR::isError($res = $smtp->rcptTo($recipient))) {
                 return PEAR::raiseError('unable to add recipient [' .
-                                      $recipient . ']: ' . $res->getMessage());
+                                        $recipient . ']: ' . $res->getMessage());
             }
         }
 
