@@ -32,9 +32,9 @@
   </maintainers>
 
   <release>
-    <version>1.1.0</version>
-    <date>2003-06-21</date>
-    <notes>The Mail package now depends on Net_SMTP 1.1.0 or greater for its SMTP authentication capabilities.</notes>
+    <version>1.1.1</version>
+    <date>2003-06-26</date>
+    <notes>Minor fixes with newlines in headers.</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" role="php">
@@ -53,6 +53,20 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.1.1</version>
+      <date>2003-06-26</date>
+      <notes>Minor fixes with newlines in headers.</notes>
+      <state>stable</state>
+    </release>
+
+    <release>
+      <version>1.1.0</version>
+      <date>2003-06-21</date>
+      <notes>The Mail package now depends on Net_SMTP 1.1.0 or greater for its SMTP authentication capabilities.</notes>
+      <state>stable</state>
+    </release>
+
     <release>
       <version>1.0.2</version>
       <date>2002-07-27</date>
