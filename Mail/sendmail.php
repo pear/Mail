@@ -109,7 +109,7 @@ class Mail_sendmail extends Mail {
         }
         
         $result = 0;
-        if (@is_executable($this->sendmail_path)) {
+        if (@is_file($this->sendmail_path)) {
             $from = escapeShellCmd($from);
             $mail = popen($this->sendmail_path . (!empty($this->sendmail_args) ? ' ' . $this->sendmail_args : '') . " -f$from -- $recipients", 'w');
             fputs($mail, $text_headers);
@@ -117,7 +117,7 @@ class Mail_sendmail extends Mail {
             fputs($mail, $body);
             $result = pclose($mail) >> 8 & 0xFF; // need to shift the pclose result to get the exit code
         } else {
-            return new PEAR_Error('sendmail [' . $this->sendmail_path . '] not executable');
+            return new PEAR_Error('sendmail [' . $this->sendmail_path . '] is not a valid file');
         }
         
         if ($result != 0) {
