@@ -128,12 +128,14 @@ class Mail_smtp extends Mail {
 
         list($from, $text_headers) = $this->prepareHeaders($headers);
 
-       // Since few MTAs are going to allow this header to be forged
-       // unless it's in the MAIL FROM: exchange, we'll use Return-Path
-       // instead of From: if it's set
-       if (!empty($headers['Return-Path'])) {
-               $from = $headers['Return-Path'];
-       }
+        /*
+         * Since few MTAs are going to allow this header to be forged unless
+         * it's in the MAIL FROM: exchange, we'll use Return-Path instead of
+         * From: if it's set.
+         */
+        if (!empty($headers['Return-Path'])) {
+            $from = $headers['Return-Path'];
+        }
 
         if (!isset($from)) {
             return new PEAR_Error('No from address given');
