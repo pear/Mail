@@ -48,7 +48,7 @@
         </dir>
     </filelist>
     <deps>
-      <dep type="pkg" rel="ge" version="1.1.0">Net_SMTP</dep>
+      <dep type="pkg" rel="ge" version="1.1.0" optional="yes">Net_SMTP</dep>
     </deps>
   </release>
 
