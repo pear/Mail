@@ -37,6 +37,7 @@
     <notes>
 - Header key comparisons are now case-insensitive. (Colin Viebrock)
 - Header fields (e.g., 'Cc', 'Bcc') may now be specified as arrays of addresses. (Colin Viebrock)
+- PHP5 compatibility fix (Bug #1563).
     </notes>
     <state>stable</state>
     <filelist>

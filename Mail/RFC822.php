@@ -164,8 +164,7 @@ class Mail_RFC822 {
      */
     function parseAddressList($address = null, $default_domain = null, $nest_groups = null, $validate = null, $limit = null)
     {
-
-        if (!isset($this->mailRFC822)) {
+        if (!isset($this) && !isset($this->mailRFC822)) {
             $obj = new Mail_RFC822($address, $default_domain, $nest_groups, $validate, $limit);
             return $obj->parseAddressList();
         }
