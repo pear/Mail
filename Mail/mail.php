@@ -108,10 +108,10 @@ class Mail_mail extends Mail
          * parameters have been provided and we're not running in safe mode.
          */
         if (empty($this->_params) || ini_get('safe_mode')) {
-            $result = return mail($recipients, $subject, $body, $text_headers);
+            $result = mail($recipients, $subject, $body, $text_headers);
         } else {
-            $result = return mail($recipients, $subject, $body, $text_headers,
-                                  $this->_params);
+            $result = mail($recipients, $subject, $body, $text_headers,
+                           $this->_params);
         }
 
         /*
