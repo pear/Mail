@@ -147,6 +147,11 @@ class Mail
                 // as spam.
                 array_unshift($lines, $key . ': ' . $value);
             } else {
+                // If $value is an array (i.e., a list of addresses), convert
+                // it to a comma-delimited string of its elements (addresses).
+                if (is_array($value)) {
+                    $value = implode(', ', $value);
+                }
                 $lines[] = $key . ': ' . $value;
             }
         }

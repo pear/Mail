@@ -36,6 +36,7 @@
     <date>2004-05-23</date>
     <notes>
 - Header key comparisons are now case-insensitive. (Colin Viebrock)
+- Header fields (e.g., 'Cc', 'Bcc') may now be specified as arrays of addresses. (Colin Viebrock)
     </notes>
     <state>stable</state>
     <filelist>
