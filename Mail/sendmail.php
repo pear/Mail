@@ -102,7 +102,12 @@ class Mail_sendmail extends Mail {
         }
         $recipients = escapeShellCmd(implode(' ', $recipients));
 
-        list($from, $text_headers) = $this->prepareHeaders($headers);
+        $headerElements = $this->prepareHeaders($headers);
+        if (PEAR::isError($headerElements)) {
+            return $headerElements;
+        }
+        list($from, $text_headers) = $headerElements;
+
         if (!isset($from)) {
             return PEAR::raiseError('No from address given.');
         } elseif (strstr($from, ' ') ||

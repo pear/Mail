@@ -169,7 +169,11 @@ class Mail_smtp extends Mail {
             }
         }
 
-        list($from, $text_headers) = $this->prepareHeaders($headers);
+        $headerElements = $this->prepareHeaders($headers);
+        if (PEAR::isError($headerElements)) {
+            return $headerElements;
+        }
+        list($from, $text_headers) = $headerElements;
 
         /* Since few MTAs are going to allow this header to be forged
          * unless it's in the MAIL FROM: exchange, we'll use

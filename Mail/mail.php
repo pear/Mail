@@ -99,7 +99,11 @@ class Mail_mail extends Mail {
         }
 
         // Flatten the headers out.
-        list(,$text_headers) = Mail::prepareHeaders($headers);
+        $headerElements = $this->prepareHeaders($headers);
+        if (PEAR::isError($headerElements)) {
+            return $headerElements;
+        }
+        list(, $text_headers) = $headerElements;
 
         /*
          * We only use mail()'s optional fifth parameter if the additional
