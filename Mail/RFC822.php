@@ -193,7 +193,7 @@ class Mail_RFC822 extends PEAR{
 
         // Reset timer since large amounts of addresses can take a long time to
         // get here
-        set_time_limit(30);
+        @set_time_limit(30);
 
         // Loop through all the addresses
         for ($i = 0; $i < count($this->addresses); $i++){
