@@ -39,6 +39,7 @@
 - Header fields (e.g., 'Cc', 'Bcc') may now be specified as arrays of addresses. (Colin Viebrock)
 - PHP5 compatibility fix (Bug #1563).
 - PHP4 / Win32 compatibility fix for the 'sendmail' driver (Bug 1881).
+- Stricter "local part" parsing for Mail_RFC822 (in accordance with Section 6.2.4 of RFC 822) (Bug 1869).
     </notes>
     <state>stable</state>
     <filelist>

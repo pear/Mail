@@ -867,6 +867,12 @@ class Mail_RFC822 {
 
         // Validate each word.
         foreach ($words as $word) {
+            // If this word contains an unquoted space, it is invalid. (6.2.4)
+            if (strpos($word, ' ') && $word[0] !== '"')
+            {
+                return false;
+            }
+
             if ($this->_validatePhrase(trim($word)) === false) return false;
         }
 
