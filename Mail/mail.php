@@ -22,11 +22,9 @@ require_once 'Mail.php';
 
 /**
  * internal PHP-mail() implementation of the PEAR Mail:: interface.
- * @access public
  * @package Mail
  * @version $Revision$
  */
- 
 class Mail_mail extends Mail
 {
     /**
@@ -42,27 +40,22 @@ class Mail_mail extends Mail
      * passed in.
      *
      * @param string $params Extra arguments for the mail() function.
-     *
-     * @access public
      */
     function Mail_mail($params = '')
     {
-        /*
-         * The other mail implementations accept parameters as arrays.  In the
-         * interest of being consistent, explode an array into a string of
-         * parameter arguments.
-         */
+        /* The other mail implementations accept parameters as arrays.
+         * In the interest of being consistent, explode an array into
+         * a string of parameter arguments. */
         if (is_array($params)) {
             $this->_params = join(' ', $params);
         } else {
             $this->_params = $params;
         }
 
-        /*
-         * Because the mail() function may pass headers as command line
-         * arguments, we can't guarantee the use of the standard "\r\n"
-         * separator.  Instead, we use the system's native line separator.
-         */
+        /* Because the mail() function may pass headers as command
+         * line arguments, we can't guarantee the use of the standard
+         * "\r\n" separator.  Instead, we use the system's native line
+         * separator. */
         $this->sep = (strstr(PHP_OS, 'WIN')) ? "\r\n" : "\n";
     }
 
@@ -89,16 +82,17 @@ class Mail_mail extends Mail
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
+     *
      * @access public
      */	
     function send($recipients, $headers, $body)
     {
-        // if we're passed an array of recipients, implode it.
+        // If we're passed an array of recipients, implode it.
         if (is_array($recipients)) {
             $recipients = implode(', ', $recipients);
         }
 
-        // get the Subject out of the headers array so that we can
+        // Get the Subject out of the headers array so that we can
         // pass it as a seperate argument to mail().
         $subject = '';
         if (isset($headers['Subject'])) {
@@ -106,10 +100,15 @@ class Mail_mail extends Mail
             unset($headers['Subject']);
         }
 
-        // flatten the headers out.
+        // Flatten the headers out.
         list(,$text_headers) = Mail::prepareHeaders($headers);
 
-        return mail($recipients, $subject, $body, $text_headers, $this->_params);
+        // mail()'s 5th parameter is not available when in safe_mode.
+        if (ini_get('safe_mode')) {
+            return mail($recipients, $subject, $body, $text_headers);
+        } else {
+            return mail($recipients, $subject, $body, $text_headers, $this->_params);
+        }
     }
 
 }
