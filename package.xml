@@ -40,5 +40,8 @@
             </dir>
         </dir>
     </filelist>
+    <deps>
+      <dep type="pkg" rel="has">Net_SMTP</dep>
+    </deps>
   </release>
 </package>
