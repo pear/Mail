@@ -16,8 +16,6 @@
 // | Author: Chuck Hagenbuch <chuck@horde.org>                            |
 // +----------------------------------------------------------------------+
 
-require_once 'Mail.php';
-
 /**
  * Sendmail implementation of the PEAR Mail:: interface.
  * @access public

@@ -19,8 +19,6 @@
 // $Id$
 //
 
-require_once 'Mail.php';
-
 /**
  * Null implementation of the PEAR Mail:: interface.
  * @access public

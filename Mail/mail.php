@@ -18,8 +18,6 @@
 //
 // $Id$
 
-require_once 'Mail.php';
-
 /**
  * internal PHP-mail() implementation of the PEAR Mail:: interface.
  * @package Mail

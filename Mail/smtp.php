@@ -17,8 +17,6 @@
 // |          Jon Parise <jon@php.net>                                    |
 // +----------------------------------------------------------------------+
 
-require_once 'Mail.php';
-
 /**
  * SMTP implementation of the PEAR Mail:: interface. Requires the PEAR
  * Net_SMTP:: class.
