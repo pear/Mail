@@ -177,9 +177,11 @@ class Mail_RFC822 {
         $this->error      = null;
         $this->index      = null;
 
-        while ($this->address = $this->_splitAddresses($this->address)) {
-            continue;
-        }
+        // Unfold any long lines in $this->address.
+        $this->address = preg_replace('/\r?\n/', "\r\n", $this->address);
+        $this->address = preg_replace('/\r\n(\t| )+/', ' ', $this->address);
+
+        while ($this->address = $this->_splitAddresses($this->address));
 
         if ($this->address === false || isset($this->error)) {
             require_once 'PEAR.php';
