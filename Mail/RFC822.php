@@ -33,8 +33,6 @@
 // |          Chuck Hagenbuch <chuck@horde.org>                            |
 // +-----------------------------------------------------------------------+
 
-require_once ('PEAR.php');
-
 /**
 * RFC 822 Email address list validation Utility
 *
@@ -59,7 +57,7 @@ require_once ('PEAR.php');
 * @package Mail
 */
 
-class Mail_RFC822 extends PEAR{
+class Mail_RFC822 {
 
     /**
      * The address being parsed by the RFC822 object.
