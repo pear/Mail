@@ -103,12 +103,26 @@ class Mail_mail extends Mail
         // Flatten the headers out.
         list(,$text_headers) = Mail::prepareHeaders($headers);
 
-        // mail()'s 5th parameter is not available when in safe_mode.
-        if (ini_get('safe_mode')) {
-            return mail($recipients, $subject, $body, $text_headers);
+        /*
+         * We only use mail()'s optional fifth parameter if the additional
+         * parameters have been provided and we're not running in safe mode.
+         */
+        if (empty($this->_params) || ini_get('safe_mode')) {
+            $result = return mail($recipients, $subject, $body, $text_headers);
         } else {
-            return mail($recipients, $subject, $body, $text_headers, $this->_params);
+            $result = return mail($recipients, $subject, $body, $text_headers,
+                                  $this->_params);
         }
-    }
 
+        /*
+         * If the mail() function returned failure, we need to create a
+         * PEAR_Error object and return it instead of the boolean result.
+         */
+        if ($result === false) {
+            $result = PEAR::raiseError('mail() returned failure',
+                                       PEAR_MAIL_FAILED);
+        }
+
+        return $result;
+    }
 }
