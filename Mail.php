@@ -118,32 +118,34 @@ class Mail extends PEAR
      */
     function prepareHeaders($headers)
     {
-        // Look out for the From: value to use along the way.
-        $text_headers = '';  // text representation of headers
+        $lines = array();
         $from = null;
 
-        foreach ($headers as $key => $val) {
-            if ($key == 'From') {
+        foreach ($headers as $key => $value) {
+            if ($key === 'From') {
                 include_once 'Mail/RFC822.php';
 
-                $from_arr = Mail_RFC822::parseAddressList($val, 'localhost', false);
-                $from = $from_arr[0]->mailbox . '@' . $from_arr[0]->host;
+                $addresses = Mail_RFC822::parseAddressList($value, 'localhost',
+                                                           false);
+                $from = $addresses[0]->mailbox . '@' . $addresses[0]->host;
+
+                // Reject envelope From: addresses with spaces.
                 if (strstr($from, ' ')) {
-                    // Reject outright envelope From addresses with spaces.
                     return false;
                 }
-                $text_headers .= $key . ': ' . $val . "\n";
-            } else if ($key == 'Received') {
-                // put Received: headers at the top, since Receieved:
-                // after Subject: in the header order is somtimes used
-                // as a spam trap.
-                $text_headers = $key . ': ' . $val . "\n" . $text_headers;
+
+                $lines[] = $key . ': ' . $value;
+            } elseif ($key === 'Received') {
+                // Put Received: headers at the top.  Spam detectors often
+                // flag messages with Received: headers after the Subject:
+                // as spam.
+                array_unshift($lines, $key . ': ' . $value);
             } else {
-                $text_headers .= $key . ': ' . $val . "\n";
+                $lines[] = $key . ': ' . $value;
             }
         }
 
-        return array($from, $text_headers);
+        return array($from, join("\r\n", $lines));
     }
 
     /**
