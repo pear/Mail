@@ -208,7 +208,7 @@ class Mail_RFC822 {
     }
 
     /**
-     * Splits an address into seperate addresses.
+     * Splits an address into separate addresses.
      *
      * @access private
      * @param string $address The addresses to split.
@@ -890,7 +890,7 @@ class Mail_RFC822 {
     }
 
     /**
-    * This is a email validating function seperate to the rest
+    * This is a email validating function separate to the rest
     * of the class. It simply validates whether an email is of
     * the common internet form: <user>@<domain>. This can be
     * sufficient for most people. Optional stricter mode can
