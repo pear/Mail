@@ -32,6 +32,12 @@ require_once 'PEAR.php';
 class Mail
 {
     /**
+     * Line terminator used for separating header lines.
+     * @var string
+     */
+    var $sep = "\r\n";
+
+    /**
      * Provides an interface for generating Mail:: objects of various
      * types
      *
@@ -145,7 +151,7 @@ class Mail
             }
         }
 
-        return array($from, join("\r\n", $lines));
+        return array($from, join($this->sep, $lines));
     }
 
     /**

@@ -18,7 +18,7 @@
 //
 // $Id$
 
-require_once ('Mail.php');
+require_once 'Mail.php';
 
 /**
  * internal PHP-mail() implementation of the PEAR Mail:: interface.
@@ -27,8 +27,8 @@ require_once ('Mail.php');
  * @version $Revision$
  */
  
-class Mail_mail extends Mail {
-
+class Mail_mail extends Mail
+{
     /**
      * Any arguments to pass to the mail() function.
      * @var string
@@ -47,7 +47,23 @@ class Mail_mail extends Mail {
      */
     function Mail_mail($params = '')
     {
-        $this->_params = $params;
+        /*
+         * The other mail implementations accept parameters as arrays.  In the
+         * interest of being consistent, explode an array into a string of
+         * parameter arguments.
+         */
+        if (is_array($params)) {
+            $this->_params = join(' ', $params);
+        } else {
+            $this->_params = $params;
+        }
+
+        /*
+         * Because the mail() function may pass headers as command line
+         * arguments, we can't guarantee the use of the standard "\r\n"
+         * separator.  Instead, we use the system's native line separator.
+         */
+        $this->sep = OS_WINDOWS ? "\r\n" : "\n";
     }
 
 	/**
