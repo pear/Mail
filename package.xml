@@ -41,6 +41,7 @@
             <file name="Mail.php"/>
             <dir name="Mail">
                 <file name="mail.php"/>
+                <file name="null.php"/>
                 <file name="sendmail.php"/>
                 <file name="smtp.php"/>
                 <file name="RFC822.php"/>
