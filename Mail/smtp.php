@@ -123,7 +123,7 @@ class Mail_smtp extends Mail {
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
-        if (isset($params['timeout'])) $this->localhost = $params['timeout'];
+        if (isset($params['timeout'])) $this->timeout = $params['timeout'];
         if (isset($params['verp'])) $this->verp = $params['verp'];
         if (isset($params['debug'])) $this->debug = (boolean)$params['debug'];
     }
