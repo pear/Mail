@@ -29,9 +29,9 @@ sendmail and SMTP. This package also provides a RFC 822 Email address list valid
   </maintainers>
 
   <release>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <date>2002-07-27</date>
-    <notes>License change for RFC822.php</notes>
+    <notes>Minor additions and changes to RFC822.php. Fixed line terminator issue for smtp.php and set smtp.php to use Return-Path header in place of From header for MAIL FROM: (if supplied)</notes>
     <state>stable</state>
     <filelist>
         <dir name="/" role="php">
@@ -52,11 +52,18 @@ sendmail and SMTP. This package also provides a RFC 822 Email address list valid
   <changelog>
 
     <release>
+      <version>1.0.1</version>
+      <date>2002-07-27</date>
+      <notes>License change for RFC822.php</notes>
+      <state>stable</state>
+    </release>
+
+    <release>
       <version>1.0</version>
       <date>2002-06-06</date>
       <notes>Initial release as PEAR package</notes>
       <state>stable</state>
-	</release>
+    </release>
 
   </changelog>
 </package>
