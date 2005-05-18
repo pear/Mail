@@ -586,8 +586,8 @@ class Mail_RFC822 {
         // Leading and trailing "
         $qstring = substr($qstring, 1, -1);
 
-        // Perform check.
-        return !(preg_match('/(.)[\x0D\\\\"]/', $qstring, $matches) && $matches[1] != '\\');
+        // Perform check, removing quoted characters first.
+        return !preg_match('/[\x0D\\\\"]/', preg_replace('/\\\\./', '', $qstring));
     }
 
     /**
