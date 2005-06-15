@@ -135,7 +135,8 @@ class Mail_sendmail extends Mail {
         }
 
         if ($result != 0) {
-            return PEAR::raiseError('sendmail returned error code ' . $result);
+            return PEAR::raiseError('sendmail returned error code ' . $result,
+                                    $result);
         }
 
         return true;
