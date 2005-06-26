@@ -146,7 +146,6 @@ class Mail
                 $lines[] = $key . ': ' . $value;
             } elseif (strcasecmp($key, 'Received') === 0) {
                 $received = array();
-                // If we've been given an array of Received: lines, join them.
                 if (is_array($value)) {
                     foreach ($value as $line) {
                         $received[] = $key . ': ' . $line;
