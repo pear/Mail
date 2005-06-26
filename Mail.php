@@ -145,10 +145,20 @@ class Mail
 
                 $lines[] = $key . ': ' . $value;
             } elseif (strcasecmp($key, 'Received') === 0) {
+                $received = array();
+                // If we've been given an array of Received: lines, join them.
+                if (is_array($value)) {
+                    foreach ($value as $line) {
+                        $received[] = $key . ': ' . $line;
+                    }
+                }
+                else {
+                    $received[] = $key . ': ' . $value;
+                }
                 // Put Received: headers at the top.  Spam detectors often
                 // flag messages with Received: headers after the Subject:
                 // as spam.
-                array_unshift($lines, $key . ': ' . $value);
+                $lines = array_merge($received, $lines);
             } else {
                 // If $value is an array (i.e., a list of addresses), convert
                 // it to a comma-delimited string of its elements (addresses).

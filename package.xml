@@ -37,6 +37,7 @@
     <notes>
 - Unfold long lines before parsing addresses in Mail_RFC822.
 - The SMTP driver now supports a 'timeout' value. (Request #3776)
+- An array of Received: headers can now be provided. (Bug #4636)
     </notes>
     <state>stable</state>
 
