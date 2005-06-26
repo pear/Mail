@@ -99,4 +99,4 @@ Array
         )
 
 )
-Validation failed for "<Jon Parise@php.net>"
+Validation failed for: <Jon Parise@php.net>
