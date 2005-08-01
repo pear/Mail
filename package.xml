@@ -32,12 +32,9 @@
   </maintainers>
 
   <release>
-    <version>1.1.5</version>
-    <date>2005-06-26</date>
+    <version>1.1.7</version>
+    <date>2005-??-??</date>
     <notes>
-- Unfold long lines before parsing addresses in Mail_RFC822.
-- The SMTP driver now supports a 'timeout' value. (Request #3776)
-- An array of Received: headers can now be provided. (Bug #4636)
     </notes>
     <state>stable</state>
 
@@ -63,10 +60,21 @@
 
   <changelog>
     <release>
+      <version>1.1.6</version>
+      <date>2005-07-12</date>
+      <notes>
+- Don't emit warnings with PHP 4.4/5.1.
+      </notes>
+      <state>stable</state>
+    </release>
+
+    <release>
       <version>1.1.5</version>
-      <date>200?-??-??</date>
+      <date>2005-06-26</date>
       <notes>
 - Unfold long lines before parsing addresses in Mail_RFC822.
+- The SMTP driver now supports a 'timeout' value. (Request #3776)
+- An array of Received: headers can now be provided. (Bug #4636)
       </notes>
       <state>stable</state>
     </release>
