@@ -66,7 +66,7 @@ class Mail_sendmail extends Mail {
          * the commandline, we can't guarantee the use of the standard "\r\n"
          * separator.  Instead, we use the system's native line separator.
          */
-        $this->sep = (strstr(PHP_OS, 'WIN')) ? "\r\n" : "\n";
+        $this->sep = (strpos(PHP_OS, 'WIN') === false) ? "\n" : "\r\n";
     }
 
 	/**
@@ -110,10 +110,10 @@ class Mail_sendmail extends Mail {
 
         if (!isset($from)) {
             return PEAR::raiseError('No from address given.');
-        } elseif (strstr($from, ' ') ||
-                  strstr($from, ';') ||
-                  strstr($from, '&') ||
-                  strstr($from, '`')) {
+        } elseif (strpos($from, ' ') !== false ||
+                  strpos($from, ';') !== false ||
+                  strpos($from, '&') !== false ||
+                  strpos($from, '`') !== false) {
             return PEAR::raiseError('From address specified with dangerous characters.');
         }
 
