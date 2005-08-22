@@ -18,8 +18,7 @@
 // +----------------------------------------------------------------------+
 
 /**
- * SMTP implementation of the PEAR Mail:: interface. Requires the PEAR
- * Net_SMTP:: class.
+ * SMTP implementation of the PEAR Mail interface. Requires the Net_SMTP class.
  * @access public
  * @package Mail
  * @version $Revision$
@@ -157,24 +156,29 @@ class Mail_smtp extends Mail {
         include_once 'Net/SMTP.php';
 
         if (!($smtp = &new Net_SMTP($this->host, $this->port, $this->localhost))) {
-            return PEAR::raiseError('unable to instantiate Net_SMTP object');
+            return PEAR::raiseError('Failed to create a Net_SMTP object');
         }
 
         if ($this->debug) {
             $smtp->setDebug(true);
         }
 
-        if (PEAR::isError($smtp->connect($this->timeout))) {
-            return PEAR::raiseError('unable to connect to smtp server ' .
-                                    $this->host . ':' . $this->port);
+        if (PEAR::isError($res = $smtp->connect($this->timeout))) {
+            $error = $this->_error('Failed to connect to ' .
+                                   $this->host . ':' . $this->port,
+                                   $res, $smtp);
+            return PEAR::raiseError($error);
         }
 
         if ($this->auth) {
             $method = is_string($this->auth) ? $this->auth : '';
 
-            if (PEAR::isError($smtp->auth($this->username, $this->password,
-                              $method))) {
-                return PEAR::raiseError('unable to authenticate to smtp server');
+            if (PEAR::isError($res = $smtp->auth($this->username,
+                                                 $this->password,
+                                                 $method))) {
+                $error = $this->_error("Authentication failure using $method",
+                                       $res, $smtp);
+                return PEAR::raiseError($error);
             }
         }
 
@@ -192,12 +196,13 @@ class Mail_smtp extends Mail {
         }
 
         if (!isset($from)) {
-            return PEAR::raiseError('No from address given');
+            return PEAR::raiseError('No From: address has been provided');
         }
 
         $args['verp'] = $this->verp;
-        if (PEAR::isError($smtp->mailFrom($from, $args))) {
-            return PEAR::raiseError('unable to set sender to [' . $from . ']');
+        if (PEAR::isError($res = $smtp->mailFrom($from, $args))) {
+            $error = $this->_error("Failed to set sender: $from", $res, $smtp);
+            return PEAR::raiseError($error);
         }
 
         $recipients = $this->parseRecipients($recipients);
@@ -207,17 +212,43 @@ class Mail_smtp extends Mail {
 
         foreach ($recipients as $recipient) {
             if (PEAR::isError($res = $smtp->rcptTo($recipient))) {
-                return PEAR::raiseError('unable to add recipient [' .
-                                        $recipient . ']: ' . $res->getMessage());
+                $error = $this->_error("Failed to add recipient: $recipient",
+                                       $res, $smtp);
+                return PEAR::raiseError($error);
             }
         }
 
-        if (PEAR::isError($smtp->data($text_headers . "\r\n" . $body))) {
-            return PEAR::raiseError('unable to send data');
+        if (PEAR::isError($res = $smtp->data($text_headers . "\r\n" . $body))) {
+            $error = $this->_error('Failed to send data', $res, $smtp);
+            return PEAR::raiseError($error);
         }
 
         $smtp->disconnect();
         return true;
     }
 
+    /**
+     * Build a standardized string describing the current SMTP error.
+     *
+     * @param string $text  Custom string describing the error context.
+     * @param object $error Reference to the current PEAR_Error object.
+     * @param object $smtp  Reference to the current Net_SMTP object.
+     *
+     * @return string       A string describing the current SMTP error.
+     *
+     * @since  1.1.7
+     * @access private
+     */
+    function _error($text, &$error, &$smtp)
+    {
+        /* Split the SMTP response into a code and a response string. */
+        list($code, $response) = $smtp->getResponse();
+
+        /* Build our standardized error string. */
+        $msg = $text;
+        $msg .= ' [SMTP: ' . $error->getMessage();
+        $msg .= " (code: $code, response: $response)]";
+
+        return $msg;
+    }
 }

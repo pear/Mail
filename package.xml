@@ -36,6 +36,7 @@
     <date>2005-??-??</date>
     <notes>
 - Mail_RFC822::isValidInetAddress() now accepts the '+' character in strict local-parts. (Bug 4943)
+- The SMTP backend now returns standardized error messages which now include additional error details from the Net_SMTP package. (Bug 4241)
     </notes>
     <state>stable</state>
 
