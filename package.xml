@@ -53,6 +53,7 @@
             </dir>
             <dir name="tests">
                 <file role="test" name="rfc822.phpt"/>
+                <file role="test" name="smtp_error.phpt"/>
             </dir>
         </dir>
     </filelist>
