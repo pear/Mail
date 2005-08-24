@@ -267,7 +267,6 @@ class Mail_smtp extends Mail {
 
         /* If persistent connections are disabled, destroy our SMTP object. */
         if ($this->persist === false) {
-            echo "Disconnecting\n";
             $this->_smtp->disconnect();
             $this->_smtp = null;
         }
