@@ -32,13 +32,10 @@
   </maintainers>
 
   <release>
-    <version>1.1.7</version>
-    <date>2005-08-21</date>
+    <version>1.1.8</version>
+    <date>2005-08-23</date>
     <notes>
-- Mail_RFC822::isValidInetAddress() now accepts the '+' character in strict local-parts. (Bug 4943)
-- The SMTP backend now returns standardized error messages which now include additional error details from the Net_SMTP package. (Bug 4241)
-- Mail::factory() now returns object references without generating PHP warnings.
-- The SMTP backend now supports a 'persist' parameter which allows the internal SMTP connection object to be reused over multiple calls to the send() method. (Bug 4122)
+- Removing a stray debugging line that snuck into the 1.1.7 release. (Bug 5190)
     </notes>
     <state>stable</state>
 
@@ -64,6 +61,17 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.1.7</version>
+      <date>2005-08-21</date>
+      <notes>
+- Mail_RFC822::isValidInetAddress() now accepts the '+' character in strict local-parts. (Bug 4943)
+- The SMTP backend now returns standardized error messages which now include additional error details from the Net_SMTP package. (Bug 4241)
+- Mail::factory() now returns object references without generating PHP warnings.
+- The SMTP backend now supports a 'persist' parameter which allows the internal SMTP connection object to be reused over multiple calls to the send() method. (Bug 4122)
+      </notes>
+      <state>stable</state>
+    </release>
     <release>
       <version>1.1.6</version>
       <date>2005-07-12</date>
