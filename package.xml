@@ -32,10 +32,10 @@
   </maintainers>
 
   <release>
-    <version>1.1.8</version>
-    <date>2005-08-23</date>
+    <version>1.1.9</version>
+    <date>2005-??-??</date>
     <notes>
-- Removing a stray debugging line that snuck into the 1.1.7 release. (Bug 5190)
+- SMTP connections are now reset (RSET) when an error occurs. (Bug 5212)
     </notes>
     <state>stable</state>
 
@@ -61,6 +61,14 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.1.8</version>
+      <date>2005-08-23</date>
+      <notes>
+- Removing a stray debugging line that snuck into the 1.1.7 release. (Bug 5190)
+      </notes>
+      <state>stable</state>
+    </release>
     <release>
       <version>1.1.7</version>
       <date>2005-08-21</date>
