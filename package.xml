@@ -36,6 +36,7 @@
     <date>2005-??-??</date>
     <notes>
 - SMTP connections are now reset (RSET) when an error occurs. (Bug 5212)
+- The SMTP driver now exposes a disconnect() method which forcibly destroys the SMTP connection. (Bug 5372)
     </notes>
     <state>stable</state>
 

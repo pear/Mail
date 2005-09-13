@@ -153,9 +153,7 @@ class Mail_smtp extends Mail {
      */
     function _Mail_smtp()
     {
-        if (is_object($this->_smtp)) {
-            $this->_smtp->disconnect();
-        }
+        $this->disconnect();
     }
 
     /**
@@ -274,11 +272,29 @@ class Mail_smtp extends Mail {
 
         /* If persistent connections are disabled, destroy our SMTP object. */
         if ($this->persist === false) {
-            $this->_smtp->disconnect();
-            $this->_smtp = null;
+            $this->disconnect();
         }
 
         return true;
+    }
+
+    /**
+     * Disconnect and destroy the current SMTP connection.
+     *
+     * @return boolean True if the SMTP connection no longer exists.
+     *
+     * @since  1.1.9
+     * @access public
+     */
+    function disconnect()
+    {
+        /* If we have an SMTP object, disconnect and destroy it. */
+        if (is_object($this->_smtp) && $this->_smtp->disconnect()) {
+            $this->_smtp = null;
+        }
+
+        /* We are disconnected if we no longer have an SMTP object. */
+        return ($this->_smtp === null);
     }
 
     /**
