@@ -121,21 +121,20 @@ class Mail_sendmail extends Mail {
             return PEAR::raiseError('From address specified with dangerous characters.');
         }
 
-        $result = 0;
-        if (@is_file($this->sendmail_path)) {
-            $from = escapeShellCmd($from);
-            $mail = popen($this->sendmail_path . (!empty($this->sendmail_args) ? ' ' . $this->sendmail_args : '') . " -f$from -- $recipients", 'w');
-            fputs($mail, $text_headers);
-            fputs($mail, $this->sep);  // newline to end the headers section
-            fputs($mail, $body);
-            $result = pclose($mail);
-            if (version_compare(phpversion(), '4.2.3') == -1) {
-                // With older php versions, we need to shift the
-                // pclose result to get the exit code.
-                $result = $result >> 8 & 0xFF;
-            }
-        } else {
-            return PEAR::raiseError('sendmail [' . $this->sendmail_path . '] is not a valid file');
+        $from = escapeShellCmd($from);
+        $mail = @popen($this->sendmail_path . (!empty($this->sendmail_args) ? ' ' . $this->sendmail_args : '') . " -f$from -- $recipients", 'w');
+        if (!$mail) {
+            return PEAR::raiseError('Failed to open sendmail [' . $this->sendmail_path . '] for execution.');
+        }
+
+        fputs($mail, $text_headers);
+        fputs($mail, $this->sep);  // newline to end the headers section
+        fputs($mail, $body);
+        $result = pclose($mail);
+        if (version_compare(phpversion(), '4.2.3') == -1) {
+            // With older php versions, we need to shift the pclose
+            // result to get the exit code.
+            $result = $result >> 8 & 0xFF;
         }
 
         if ($result != 0) {
