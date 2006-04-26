@@ -33,7 +33,7 @@
 
   <release>
     <version>1.1.10</version>
-    <date>2006-??-??</date>
+    <date>2006-04-26</date>
     <notes>
 - The SMTP driver now includes an error code in its PEAR_Error objects. (Bug 6983)
     </notes>
