@@ -1,5 +1,12 @@
 --TEST--
 Mail: SMTP Error Reporting
+--SKIPIF--
+<?php
+
+require_once 'PEAR/Registry.php';
+$registry = &new PEAR_Registry();
+
+if (!$registry->packageExists('Net_SMTP')) die("skip\n");
 --FILE--
 <?php
 require_once 'Mail.php';
