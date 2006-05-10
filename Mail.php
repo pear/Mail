@@ -169,7 +169,7 @@ class Mail
             }
         }
 
-        return array($from, join($this->sep, $lines) . $this->sep);
+        return array($from, join($this->sep, $lines));
     }
 
     /**
