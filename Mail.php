@@ -181,7 +181,8 @@ class Mail
      *              (RFC822 compliant), or an array of recipients,
      *              each RFC822 valid.
      *
-     * @return array An array of forward paths (bare addresses).
+     * @return mixed An array of forward paths (bare addresses) or a PEAR_Error
+     *               object if the address list could not be parsed.
      * @access private
      */
     function parseRecipients($recipients)
@@ -198,6 +199,12 @@ class Mail
         // for smtp recipients, etc. All relevant personal information
         // should already be in the headers.
         $addresses = Mail_RFC822::parseAddressList($recipients, 'localhost', false);
+
+        // If parseAddressList() returned a PEAR_Error object, just return it.
+        if (PEAR::isError($addresses)) {
+            return $addresses;
+        }
+
         $recipients = array();
         if (is_array($addresses)) {
             foreach ($addresses as $ob) {
