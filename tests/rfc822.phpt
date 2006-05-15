@@ -24,7 +24,7 @@ $result = $parser->parseAddressList($address, null, true, true);
 if (PEAR::isError($result)) echo $result->getMessage() . "\n";
 
 /* A valid address with an uncommon TLD. */
-$address = 'jon@host.tld';
+$address = 'jon@host.longtld';
 $result = $parser->parseAddressList($address, null, true, true);
 if (PEAR::isError($result)) echo $result->getMessage() . "\n";
 
