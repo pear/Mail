@@ -37,6 +37,7 @@
     <notes>
 - Mail::prepareHeaders() now longer appends a trailing newline. (Bug 7492)
 - Mail::parseRecipients() now returns a PEAR_Error object on error. (Bug 7491)
+- Mail_RFC822::isValidInetAddress() now permits domain parts longer than four characters.  The two character minimum remains in effect. (Bug 7562)
     </notes>
     <state>stable</state>
 
