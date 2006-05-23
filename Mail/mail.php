@@ -102,6 +102,12 @@ class Mail_mail extends Mail {
             unset($headers['Subject']);
         }
 
+        /*
+         * Also remove the To: header.  The mail() function will add its own
+         * To: header based on the contents of $recipients.
+         */
+        unset($headers['To']);
+
         // Flatten the headers out.
         $headerElements = $this->prepareHeaders($headers);
         if (PEAR::isError($headerElements)) {
