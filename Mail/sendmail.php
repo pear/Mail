@@ -36,7 +36,7 @@ class Mail_sendmail extends Mail {
      * sendmail wrapper binary.
      * @var string
      */
-    var $sendmail_args = '';
+    var $sendmail_args = '-i';
 
 	/**
      * Constructor.
@@ -58,8 +58,12 @@ class Mail_sendmail extends Mail {
      */
     function Mail_sendmail($params)
     {
-        if (isset($params['sendmail_path'])) $this->sendmail_path = $params['sendmail_path'];
-        if (isset($params['sendmail_args'])) $this->sendmail_args = $params['sendmail_args'];
+        if (isset($params['sendmail_path'])) {
+            $this->sendmail_path = $params['sendmail_path'];
+        }
+        if (isset($params['sendmail_args'])) {
+            $this->sendmail_args = $params['sendmail_args'];
+        }
 
         /*
          * Because we need to pass message headers to the sendmail program on

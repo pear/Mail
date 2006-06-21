@@ -39,6 +39,7 @@
 - Mail::parseRecipients() now returns a PEAR_Error object on error. (Bug 7491)
 - Mail_RFC822::isValidInetAddress() now permits domain parts longer than four characters.  The two character minimum remains in effect. (Bug 7562)
 - Fixed the tests for the existence of the PHP_EOL constant. (Bug 7682)
+- Changed the default 'sendmail_args' value to include the '-i' argument. (Bug 7785)
     </notes>
     <state>stable</state>
 
