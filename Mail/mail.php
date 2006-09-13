@@ -89,6 +89,8 @@ class Mail_mail extends Mail {
      */
     function send($recipients, $headers, $body)
     {
+        $this->_sanitizeHeaders($headers);
+
         // If we're passed an array of recipients, implode it.
         if (is_array($recipients)) {
             $recipients = implode(', ', $recipients);

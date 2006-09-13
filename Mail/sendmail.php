@@ -110,6 +110,7 @@ class Mail_sendmail extends Mail {
         }
         $recipients = escapeShellCmd(implode(' ', $recipients));
 
+        $this->_sanitizeHeaders($headers);
         $headerElements = $this->prepareHeaders($headers);
         if (PEAR::isError($headerElements)) {
             return $headerElements;

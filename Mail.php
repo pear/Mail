@@ -87,6 +87,8 @@ class Mail
      */
     function send($recipients, $headers, $body)
     {
+        $this->_sanitizeHeaders($headers);
+
         // if we're passed an array of recipients, implode it.
         if (is_array($recipients)) {
             $recipients = implode(', ', $recipients);
@@ -105,6 +107,24 @@ class Mail
 
         return mail($recipients, $subject, $body, $text_headers);
 
+    }
+
+    /**
+     * Sanitize an array of mail headers by removing any additional header
+     * strings present in a legitimate header's value.  The goal of this
+     * filter is to prevent mail injection attacks.
+     *
+     * @param array $headers The associative array of headers to sanitize.
+     *
+     * @access private
+     */
+    function _sanitizeHeaders(&$headers)
+    {
+        foreach ($headers as $key => $value) {
+            $headers[$key] =
+                preg_replace('=(<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r).*=',
+                             null, $_value);
+        }
     }
 
     /**

@@ -244,6 +244,7 @@ class Mail_smtp extends Mail {
             }
         }
 
+        $this->_sanitizeHeaders($headers);
         $headerElements = $this->prepareHeaders($headers);
         if (PEAR::isError($headerElements)) {
             $this->_smtp->rset();
