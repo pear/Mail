@@ -23,4 +23,4 @@ if (PEAR::isError($e = $mailer->send(array(), array(), ''))) {
 }
 
 --EXPECT--
-Failed to connect to bogus.host.tld:25 [SMTP: Failed to connect socket: Unknown error: 0 (code: -1, response: )]
+Failed to connect to bogus.host.tld:25 [SMTP: Failed to connect socket:  (code: -1, response: )]
