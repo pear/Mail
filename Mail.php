@@ -122,7 +122,7 @@ class Mail
     {
         foreach ($headers as $key => $value) {
             $headers[$key] =
-                preg_replace('=(<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r).*=',
+                preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
                              null, $value);
         }
     }
