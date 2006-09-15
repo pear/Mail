@@ -132,8 +132,10 @@ class Mail_sendmail extends Mail {
             return PEAR::raiseError('Failed to open sendmail [' . $this->sendmail_path . '] for execution.');
         }
 
-        fputs($mail, $text_headers);
-        fputs($mail, $this->sep);  // newline to end the headers section
+        // Write the headers following by two newlines: one to end the headers
+        // section and a second to separate the headers block from the body.
+        fputs($mail, $text_headers . $this->sep . $this->sep);
+
         fputs($mail, $body);
         $result = pclose($mail);
         if (version_compare(phpversion(), '4.2.3') == -1) {

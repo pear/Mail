@@ -36,6 +36,7 @@
     <date>2006-09-14</date>
     <notes>
 - Fix _sanitizeHeaders() so that it doesn't eat multiline headers. (Bug 8688, Bug 8699)
+- The sendmail backend now correctly writes a blank line between the headers and body text. (Bug 8543)
     </notes>
     <state>stable</state>
 
