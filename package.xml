@@ -22,13 +22,6 @@
       <name>Richard Heyes</name>
       <email>richard@phpguru.org</email>
     </maintainer>
-
-    <maintainer>
-      <user>jon</user>
-      <role>lead</role>
-      <name>Jon Parise</name>
-      <email>jon@php.net</email>
-    </maintainer>
   </maintainers>
 
   <release>
