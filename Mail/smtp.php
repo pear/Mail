@@ -288,7 +288,7 @@ class Mail_smtp extends Mail {
         }
 
         /* Send the message's headers and the body as SMTP data. */
-        if (PEAR::isError($res = $this->_smtp->data("$textHeaders\r\n$body"))) {
+        if (PEAR::isError($res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body))) {
             $error = $this->_error('Failed to send data', $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_DATA);
@@ -344,4 +344,5 @@ class Mail_smtp extends Mail {
 
         return $msg;
     }
+
 }
