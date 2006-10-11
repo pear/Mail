@@ -25,11 +25,10 @@
   </maintainers>
 
   <release>
-    <version>1.1.13</version>
-    <date>2006-09-14</date>
+    <version>1.1.14</version>
+    <date>2006-10-11</date>
     <notes>
-- Fix _sanitizeHeaders() so that it doesn't eat multiline headers. (Bug 8688, Bug 8699)
-- The sendmail backend now correctly writes a blank line between the headers and body text. (Bug 8543)
+- Fix missing seperation between headers and body in the SMTP driver (Bug #8723).
     </notes>
     <state>stable</state>
 
@@ -55,6 +54,15 @@
   </release>
 
   <changelog>
+    <release>
+      <version>1.1.13</version>
+      <date>2006-09-14</date>
+      <notes>
+- Fix _sanitizeHeaders() so that it doesn't eat multiline headers. (Bug 8688, Bug 8699)
+- The sendmail backend now correctly writes a blank line between the headers and body text. (Bug 8543)
+      </notes>
+      <state>stable</state>
+    </release>
     <release>
       <version>1.1.12</version>
       <date>2006-09-13</date>
