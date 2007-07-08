@@ -33,6 +33,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  <license>PHP/BSD</license>
  <notes>- Allow turning on SMTP pipelining if the SMTP server and Net_SMTP support it.
 - Ensure that setting Return-Path always overrides the envelope sender.
+- Add an experimental smtpmx driver (delivers directly to MX servers via SMTP) (gerd@php-tools.net, Bug #5388).
  </notes>
  <contents>
   <dir name="/">
@@ -42,6 +43,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
     <file name="RFC822.php" role="php" />
     <file name="sendmail.php" role="php" />
     <file name="smtp.php" role="php" />
+    <file name="smtpmx.php" role="php" />
    </dir> <!-- /Mail -->
    <dir name="tests">
     <file name="rfc822.phpt" role="test" />
