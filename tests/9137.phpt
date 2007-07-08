@@ -3,7 +3,7 @@ Mail: Test for bug #9137
 --FILE--
 <?php
 
-require_once 'Mail/RFC822.php';
+require_once dirname(__FILE__) . '/../Mail/RFC822.php';
 require_once 'PEAR.php';
 
 $addresses = array(
