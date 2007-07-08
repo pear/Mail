@@ -1,210 +1,354 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- do not use the "Type" attribute here, that one is only for
-     generated package.xml files -->
-<package version="1.0">
-
-  <name>Mail</name>
-  <summary>Class that provides multiple interfaces for sending emails</summary>
-  <description>PEAR's Mail package defines an interface for implementing mailers under the PEAR hierarchy.  It also provides supporting functions useful to multiple mailer backends.  Currently supported backends include: PHP's native mail() function, sendmail, and SMTP.  This package also provides a RFC822 email address list validation utility class.</description>
-  <license>PHP/BSD</license>
-
-  <maintainers>
-    <maintainer>
-      <user>chagenbu</user>
-      <role>lead</role>
-      <name>Chuck Hagenbuch</name>
-      <email>chuck@horde.org</email>
-    </maintainer>
-
-    <maintainer>
-      <user>richard</user>
-      <role>developer</role>
-      <name>Richard Heyes</name>
-      <email>richard@phpguru.org</email>
-    </maintainer>
-  </maintainers>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Mail</name>
+ <channel>pear.php.net</channel>
+ <summary>Class that provides multiple interfaces for sending emails</summary>
+ <description>PEAR&apos;s Mail package defines an interface for implementing mailers under the PEAR hierarchy.  It also provides supporting functions useful to multiple mailer backends.  Currently supported backends include: PHP&apos;s native mail() function, sendmail, and SMTP.  This package also provides a RFC822 email address list validation utility class.
+ </description>
+ <lead>
+  <name>Chuck Hagenbuch</name>
+  <user>chagenbu</user>
+  <email>chuck@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <developer>
+  <name>Richard Heyes</name>
+  <user>richard</user>
+  <email>richard@phpguru.org</email>
+  <active>yes</active>
+ </developer>
+ <date>2007-07-07</date>
+ <time>22:36:00</time>
+ <version>
+  <release>1.1.15</release>
+  <api>1.1.15</api>
+ </version>
+ <stability>
+  <release>stable</release>
+  <api>stable</api>
+ </stability>
+ <license>PHP/BSD</license>
+ <notes>- Allow turning on SMTP pipelining if the SMTP server and Net_SMTP support it.
+ </notes>
+ <contents>
+  <dir name="/">
+   <dir name="Mail">
+    <file name="mail.php" role="php" />
+    <file name="null.php" role="php" />
+    <file name="RFC822.php" role="php" />
+    <file name="sendmail.php" role="php" />
+    <file name="smtp.php" role="php" />
+   </dir> <!-- /Mail -->
+   <dir name="tests">
+    <file name="rfc822.phpt" role="test" />
+    <file name="smtp_error.phpt" role="test" />
+   </dir> <!-- /tests -->
+   <file name="Mail.php" role="php" />
+  </dir> <!-- / -->
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+  <optional>
+   <package>
+    <name>Net_SMTP</name>
+    <channel>pear.php.net</channel>
+    <min>1.1.0</min>
+   </package>
+  </optional>
+ </dependencies>
+ <phprelease />
+ <changelog>
   <release>
-    <version>1.1.14</version>
-    <date>2006-10-11</date>
-    <notes>
-- Fix missing seperation between headers and body in the SMTP driver (Bug #8723).
-    </notes>
-    <state>stable</state>
-
-    <filelist>
-        <dir name="/" role="php">
-            <file name="Mail.php"/>
-            <dir name="Mail">
-                <file name="mail.php"/>
-                <file name="null.php"/>
-                <file name="sendmail.php"/>
-                <file name="smtp.php"/>
-                <file name="RFC822.php"/>
-            </dir>
-            <dir name="tests">
-                <file role="test" name="rfc822.phpt"/>
-                <file role="test" name="smtp_error.phpt"/>
-            </dir>
-        </dir>
-    </filelist>
-    <deps>
-      <dep type="pkg" rel="ge" version="1.1.0" optional="yes">Net_SMTP</dep>
-    </deps>
+   <version>
+    <release>1.1.14</release>
+    <api>1.1.14</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-10-11</date>
+   <license>PHP/BSD</license>
+   <notes>- Fix missing seperation between headers and body in the SMTP driver (Bug #8723).
+      
+   </notes>
   </release>
-
-  <changelog>
-    <release>
-      <version>1.1.13</version>
-      <date>2006-09-14</date>
-      <notes>
-- Fix _sanitizeHeaders() so that it doesn't eat multiline headers. (Bug 8688, Bug 8699)
+  <release>
+   <version>
+    <release>1.1.13</release>
+    <api>1.1.13</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-09-14</date>
+   <license>PHP/BSD</license>
+   <notes>- Fix _sanitizeHeaders() so that it doesn&apos;t eat multiline headers. (Bug 8688, Bug 8699)
 - The sendmail backend now correctly writes a blank line between the headers and body text. (Bug 8543)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.12</version>
-      <date>2006-09-13</date>
-      <notes>
-- Fix typo in _sanitizeHeaders() that blanked out all headers. (Bug 8685)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.11</version>
-      <date>2006-09-12</date>
-      <notes>
-- Mail::prepareHeaders() no longer appends a trailing newline. (Bug 7492)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.12</release>
+    <api>1.1.12</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-09-13</date>
+   <license>PHP/BSD</license>
+   <notes>- Fix typo in _sanitizeHeaders() that blanked out all headers. (Bug 8685)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.11</release>
+    <api>1.1.11</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-09-12</date>
+   <license>PHP/BSD</license>
+   <notes>- Mail::prepareHeaders() no longer appends a trailing newline. (Bug 7492)
 - Mail::parseRecipients() now returns a PEAR_Error object on error. (Bug 7491)
 - Mail_RFC822::isValidInetAddress() now permits domain parts longer than four characters.  The two character minimum remains in effect. (Bug 7562)
 - Fixed the tests for the existence of the PHP_EOL constant. (Bug 7682)
-- Changed the default 'sendmail_args' value to include the '-i' argument. (Bug 7785)
+- Changed the default &apos;sendmail_args&apos; value to include the &apos;-i&apos; argument. (Bug 7785)
 - We now guard against email injection exploits. (Bug 6229)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.10</version>
-      <date>2006-04-25</date>
-      <notes>
-- The SMTP driver now includes an error code in its PEAR_Error objects. (Bug 6983)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.9</version>
-      <date>2005-09-13</date>
-      <notes>
-- SMTP connections are now reset (RSET) when an error occurs. (Bug 5212)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.10</release>
+    <api>1.1.10</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-04-25</date>
+   <license>PHP/BSD</license>
+   <notes>- The SMTP driver now includes an error code in its PEAR_Error objects. (Bug 6983)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.9</release>
+    <api>1.1.9</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-09-13</date>
+   <license>PHP/BSD</license>
+   <notes>- SMTP connections are now reset (RSET) when an error occurs. (Bug 5212)
 - The SMTP driver now exposes a disconnect() method which forcibly destroys the SMTP connection. (Bug 5372)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.8</version>
-      <date>2005-08-23</date>
-      <notes>
-- Removing a stray debugging line that snuck into the 1.1.7 release. (Bug 5190)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.7</version>
-      <date>2005-08-21</date>
-      <notes>
-- Mail_RFC822::isValidInetAddress() now accepts the '+' character in strict local-parts. (Bug 4943)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.8</release>
+    <api>1.1.8</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-08-23</date>
+   <license>PHP/BSD</license>
+   <notes>- Removing a stray debugging line that snuck into the 1.1.7 release. (Bug 5190)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.7</release>
+    <api>1.1.7</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-08-21</date>
+   <license>PHP/BSD</license>
+   <notes>- Mail_RFC822::isValidInetAddress() now accepts the &apos;+&apos; character in strict local-parts. (Bug 4943)
 - The SMTP backend now returns standardized error messages which now include additional error details from the Net_SMTP package. (Bug 4241)
 - Mail::factory() now returns object references without generating PHP warnings.
-- The SMTP backend now supports a 'persist' parameter which allows the internal SMTP connection object to be reused over multiple calls to the send() method. (Bug 4122)
-      </notes>
-      <state>stable</state>
-    </release>
-    <release>
-      <version>1.1.6</version>
-      <date>2005-07-12</date>
-      <notes>
-- Don't emit warnings with PHP 4.4/5.1.
-      </notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.5</version>
-      <date>2005-06-26</date>
-      <notes>
-- Unfold long lines before parsing addresses in Mail_RFC822.
-- The SMTP driver now supports a 'timeout' value. (Request #3776)
+- The SMTP backend now supports a &apos;persist&apos; parameter which allows the internal SMTP connection object to be reused over multiple calls to the send() method. (Bug 4122)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.6</release>
+    <api>1.1.6</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-07-12</date>
+   <license>PHP/BSD</license>
+   <notes>- Don&apos;t emit warnings with PHP 4.4/5.1.
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.5</release>
+    <api>1.1.5</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2005-06-26</date>
+   <license>PHP/BSD</license>
+   <notes>- Unfold long lines before parsing addresses in Mail_RFC822.
+- The SMTP driver now supports a &apos;timeout&apos; value. (Request #3776)
 - An array of Received: headers can now be provided. (Bug #4636)
-      </notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.4</version>
-      <date>2004-09-08</date>
-      <notes>
-- Header key comparisons are now case-insensitive. (Colin Viebrock)
-- Header fields (e.g., 'Cc', 'Bcc') may now be specified as arrays of addresses. (Colin Viebrock)
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.4</release>
+    <api>1.1.4</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-09-08</date>
+   <license>PHP/BSD</license>
+   <notes>- Header key comparisons are now case-insensitive. (Colin Viebrock)
+- Header fields (e.g., &apos;Cc&apos;, &apos;Bcc&apos;) may now be specified as arrays of addresses. (Colin Viebrock)
 - PHP5 compatibility fix (Bug #1563).
-- PHP4 / Win32 compatibility fix for the 'sendmail' driver (Bug 1881).
-- Stricter "local part" parsing for Mail_RFC822 (in accordance with Section 6.2.4 of RFC 822) (Bug 1869).
+- PHP4 / Win32 compatibility fix for the &apos;sendmail&apos; driver (Bug 1881).
+- Stricter &quot;local part&quot; parsing for Mail_RFC822 (in accordance with Section 6.2.4 of RFC 822) (Bug 1869).
 - The various send() implementations now properly escalate the PEAR_Error object returned by Mail::prepareHeaders() in the event of an invalid header.
-      </notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.3</version>
-      <date>2004-04-08</date>
-      <notes>
-- The 'mail' driver now returns a PEAR_Error object on failure.
-- The individual drivers no longer include the 'Mail.php' file.  If you want to instantiate a driver directly, you'll need to explicitly include the 'Mail.php' file yourself.
-      </notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.2</version>
-      <date>2003-09-04</date>
-      <notes>The 'localhost' value can now be set in the SMTP driver.</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.1</version>
-      <date>2003-06-26</date>
-      <notes>Minor fixes with newlines in headers.</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.1.0</version>
-      <date>2003-06-21</date>
-      <notes>The Mail package now depends on Net_SMTP 1.1.0 or greater for its SMTP authentication capabilities.</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.0.2</version>
-      <date>2002-07-27</date>
-      <notes>Minor additions and changes to RFC822.php. Fixed line terminator issue for smtp.php and set smtp.php to use Return-Path header in place of From header for MAIL FROM: (if supplied)</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.0.1</version>
-      <date>2002-07-27</date>
-      <notes>License change for RFC822.php</notes>
-      <state>stable</state>
-    </release>
-
-    <release>
-      <version>1.0</version>
-      <date>2002-06-06</date>
-      <notes>Initial release as PEAR package</notes>
-      <state>stable</state>
-    </release>
-  </changelog>
-
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.3</release>
+    <api>1.1.3</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2004-04-08</date>
+   <license>PHP/BSD</license>
+   <notes>- The &apos;mail&apos; driver now returns a PEAR_Error object on failure.
+- The individual drivers no longer include the &apos;Mail.php&apos; file.  If you want to instantiate a driver directly, you&apos;ll need to explicitly include the &apos;Mail.php&apos; file yourself.
+      
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.2</release>
+    <api>1.1.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-09-04</date>
+   <license>PHP/BSD</license>
+   <notes>The &apos;localhost&apos; value can now be set in the SMTP driver.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.1</release>
+    <api>1.1.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-06-26</date>
+   <license>PHP/BSD</license>
+   <notes>Minor fixes with newlines in headers.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.1.0</release>
+    <api>1.1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2003-06-21</date>
+   <license>PHP/BSD</license>
+   <notes>The Mail package now depends on Net_SMTP 1.1.0 or greater for its SMTP authentication capabilities.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.2</release>
+    <api>1.0.2</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-07-27</date>
+   <license>PHP/BSD</license>
+   <notes>Minor additions and changes to RFC822.php. Fixed line terminator issue for smtp.php and set smtp.php to use Return-Path header in place of From header for MAIL FROM: (if supplied)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0.1</release>
+    <api>1.0.1</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-07-27</date>
+   <license>PHP/BSD</license>
+   <notes>License change for RFC822.php
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.0</release>
+    <api>1.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2002-06-06</date>
+   <license>PHP/BSD</license>
+   <notes>Initial release as PEAR package
+   </notes>
+  </release>
+ </changelog>
 </package>

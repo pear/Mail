@@ -130,6 +130,14 @@ class Mail_smtp extends Mail {
     var $persist = false;
 
     /**
+     * Use SMTP command pipelining (specified in RFC 2920) if the SMTP server
+     * supports it. This speeds up delivery over high-latency connections. By
+     * default, use the default value supplied by Net_SMTP.
+     * @var bool
+     */
+    var $pipelining;
+
+    /**
      * Constructor.
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
@@ -144,6 +152,7 @@ class Mail_smtp extends Mail {
      *     verp        Whether to use VERP or not. Defaults to false.
      *     debug       Activate SMTP debug mode? Defaults to false.
      *     persist     Should the SMTP connection persist?
+     *     pipelining  Use SMTP command pipelining
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
@@ -162,8 +171,9 @@ class Mail_smtp extends Mail {
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
         if (isset($params['timeout'])) $this->timeout = $params['timeout'];
         if (isset($params['verp'])) $this->verp = $params['verp'];
-        if (isset($params['debug'])) $this->debug = (boolean)$params['debug'];
-        if (isset($params['persist'])) $this->persist = (boolean)$params['persist'];
+        if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
+        if (isset($params['persist'])) $this->persist = (bool)$params['persist'];
+        if (isset($params['pipelining'])) $this->pipelining = (bool)$params['pipelining'];
 
         register_shutdown_function(array(&$this, '_Mail_smtp'));
     }
@@ -214,6 +224,10 @@ class Mail_smtp extends Mail {
             if (is_object($this->_smtp) === false) {
                 return PEAR::raiseError('Failed to create a Net_SMTP object',
                                         PEAR_MAIL_SMTP_ERROR_CREATE);
+            }
+
+            if (isset($this->pipelining)) {
+                $this->_smtp->pipelining = $this->pipelining;
             }
 
             /* Configure the SMTP connection. */
