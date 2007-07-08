@@ -24,21 +24,21 @@
  */
 class Mail_sendmail extends Mail {
 
-	/**
+    /**
      * The location of the sendmail or sendmail wrapper binary on the
      * filesystem.
      * @var string
      */
     var $sendmail_path = '/usr/sbin/sendmail';
 
-	/**
+    /**
      * Any extra command-line parameters to pass to the sendmail or
      * sendmail wrapper binary.
      * @var string
      */
     var $sendmail_args = '-i';
 
-	/**
+    /**
      * Constructor.
      *
      * Instantiates a new Mail_sendmail:: object based on the parameters
@@ -77,7 +77,7 @@ class Mail_sendmail extends Mail {
         }
     }
 
-	/**
+    /**
      * Implements Mail::send() function using the sendmail
      * command-line binary.
      *
@@ -116,6 +116,13 @@ class Mail_sendmail extends Mail {
             return $headerElements;
         }
         list($from, $text_headers) = $headerElements;
+
+        /* Since few MTAs are going to allow this header to be forged
+         * unless it's in the MAIL FROM: exchange, we'll use
+         * Return-Path instead of From: if it's set. */
+        if (!empty($headers['Return-Path'])) {
+            $from = $headers['Return-Path'];
+        }
 
         if (!isset($from)) {
             return PEAR::raiseError('No from address given.');

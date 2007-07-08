@@ -32,6 +32,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
  </stability>
  <license>PHP/BSD</license>
  <notes>- Allow turning on SMTP pipelining if the SMTP server and Net_SMTP support it.
+- Ensure that setting Return-Path always overrides the envelope sender.
  </notes>
  <contents>
   <dir name="/">

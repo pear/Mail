@@ -41,9 +41,9 @@ class Mail_mail extends Mail {
      */
     function Mail_mail($params = null)
     {
-        /* The other mail implementations accept parameters as arrays.
-         * In the interest of being consistent, explode an array into
-         * a string of parameter arguments. */
+        // The other mail implementations accept parameters as arrays.
+        // In the interest of being consistent, explode an array into
+        // a string of parameter arguments.
         if (is_array($params)) {
             $this->_params = join(' ', $params);
         } else {
@@ -61,7 +61,7 @@ class Mail_mail extends Mail {
         }
     }
 
-	/**
+    /**
      * Implements Mail_mail::send() function using php's built-in mail()
      * command.
      *
@@ -104,10 +104,8 @@ class Mail_mail extends Mail {
             unset($headers['Subject']);
         }
 
-        /*
-         * Also remove the To: header.  The mail() function will add its own
-         * To: header based on the contents of $recipients.
-         */
+        // Also remove the To: header.  The mail() function will add its own
+        // To: header based on the contents of $recipients.
         unset($headers['To']);
 
         // Flatten the headers out.
@@ -117,10 +115,8 @@ class Mail_mail extends Mail {
         }
         list(, $text_headers) = $headerElements;
 
-        /*
-         * We only use mail()'s optional fifth parameter if the additional
-         * parameters have been provided and we're not running in safe mode.
-         */
+        // We only use mail()'s optional fifth parameter if the additional
+        // parameters have been provided and we're not running in safe mode.
         if (empty($this->_params) || ini_get('safe_mode')) {
             $result = mail($recipients, $subject, $body, $text_headers);
         } else {
@@ -128,10 +124,8 @@ class Mail_mail extends Mail {
                            $this->_params);
         }
 
-        /*
-         * If the mail() function returned failure, we need to create a
-         * PEAR_Error object and return it instead of the boolean result.
-         */
+        // If the mail() function returned failure, we need to create a
+        // PEAR_Error object and return it instead of the boolean result.
         if ($result === false) {
             $result = PEAR::raiseError('mail() returned failure');
         }

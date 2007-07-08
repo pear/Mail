@@ -82,6 +82,7 @@ class Mail
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
      *               failure.
+     *
      * @access public
      * @deprecated use Mail_mail::send instead
      */
@@ -103,7 +104,7 @@ class Mail
         }
 
         // flatten the headers out.
-        list(,$text_headers) = Mail::prepareHeaders($headers);
+        list(, $text_headers) = Mail::prepareHeaders($headers);
 
         return mail($recipients, $subject, $body, $text_headers);
 
