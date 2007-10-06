@@ -236,7 +236,8 @@ class Mail_smtp extends Mail {
             }
 
             /* Attempt to connect to the configured SMTP server. */
-            if (PEAR::isError($res = $this->_smtp->connect($this->timeout))) {
+            $res = $this->_smtp->connect($this->timeout);
+            if (is_a($res, 'PEAR_Error')) {
                 $error = $this->_error('Failed to connect to ' .
                                        $this->host . ':' . $this->port,
                                        $res);
@@ -247,20 +248,28 @@ class Mail_smtp extends Mail {
             if ($this->auth) {
                 $method = is_string($this->auth) ? $this->auth : '';
 
-                if (PEAR::isError($res = $this->_smtp->auth($this->username,
-                                                            $this->password,
-                                                            $method))) {
-                    $error = $this->_error("$method authentication failure",
-                                           $res);
+                $res = $this->_smtp->auth($this->username,
+                                          $this->password,
+                                          $method);
+                if (is_a($res, 'PEAR_Error')) {
+                    $error = $this->_error("$method authentication failure", $res);
                     $this->_smtp->rset();
                     return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
                 }
             }
         }
 
-        $this->_sanitizeHeaders($headers);
+        if (!is_array($headers)) {
+            return PEAR::raiseError('$headers must be an array');
+        }
+
+        $result = $this->_sanitizeHeaders($headers);
+        if (is_a($result, 'PEAR_Error')) {
+            return $result;
+        }
+
         $headerElements = $this->prepareHeaders($headers);
-        if (PEAR::isError($headerElements)) {
+        if (is_a($headerElements, 'PEAR_Error')) {
             $this->_smtp->rset();
             return $headerElements;
         }
@@ -280,29 +289,31 @@ class Mail_smtp extends Mail {
         }
 
         $args['verp'] = $this->verp;
-        if (PEAR::isError($res = $this->_smtp->mailFrom($from, $args))) {
+        $res = $this->_smtp->mailFrom($from, $args);
+        if (is_a($res, 'PEAR_Error')) {
             $error = $this->_error("Failed to set sender: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
         }
 
         $recipients = $this->parseRecipients($recipients);
-        if (PEAR::isError($recipients)) {
+        if (is_a($recipients, 'PEAR_Error')) {
             $this->_smtp->rset();
             return $recipients;
         }
 
         foreach ($recipients as $recipient) {
-            if (PEAR::isError($res = $this->_smtp->rcptTo($recipient))) {
-                $error = $this->_error("Failed to add recipient: $recipient",
-                                       $res);
+            $res = $this->_smtp->rcptTo($recipient);
+            if (is_a($res, 'PEAR_Error')) {
+                $error = $this->_error("Failed to add recipient: $recipient", $res);
                 $this->_smtp->rset();
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_RECIPIENT);
             }
         }
 
         /* Send the message's headers and the body as SMTP data. */
-        if (PEAR::isError($res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body))) {
+        $res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body);
+        if (is_a($res, 'PEAR_Error')) {
             $error = $this->_error('Failed to send data', $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_DATA);

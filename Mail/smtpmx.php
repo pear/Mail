@@ -249,9 +249,18 @@ class Mail_smtpmx extends Mail {
      */
     function send($recipients, $headers, $body)
     {
-        // prepare headers
+        if (!is_array($headers)) {
+            return PEAR::raiseError('$headers must be an array');
+        }
+
+        $result = $this->_sanitizeHeaders($headers);
+        if (is_a($result, 'PEAR_Error')) {
+            return $result;
+        }
+
+        // Prepare headers
         $headerElements = $this->prepareHeaders($headers);
-        if (PEAR::isError($headerElements)) {
+        if (is_a($headerElements, 'PEAR_Error')) {
             return $headerElements;
         }
         list($from, $textHeaders) = $headerElements;
@@ -264,9 +273,9 @@ class Mail_smtpmx extends Mail {
             return $this->_raiseError('no_from');
         }
 
-        // prepare recipients
+        // Prepare recipients
         $recipients = $this->parseRecipients($recipients);
-        if (PEAR::isError($recipients)) {
+        if (is_a($recipients, 'PEAR_Error')) {
             return $recipients;
         }
 
@@ -274,7 +283,7 @@ class Mail_smtpmx extends Mail {
             list($user, $host) = explode('@', $rcpt);
 
             $mx = $this->_getMx($host);
-            if (PEAR::isError($mx)) {
+            if (is_a($mx, 'PEAR_Error')) {
                 return $mx;
             }
 
@@ -294,7 +303,7 @@ class Mail_smtpmx extends Mail {
 
                 // attempt to connect to the configured SMTP server.
                 $res = $this->_smtp->connect($this->timeout);
-                if (PEAR::isError($res)) {
+                if (is_a($res, 'PEAR_Error')) {
                     $this->_smtp = null;
                     continue;
                 }
@@ -315,9 +324,10 @@ class Mail_smtpmx extends Mail {
                 return $this->_raiseError('not_connected', $info);
             }
 
-            // verify recipient
+            // Verify recipient
             if ($this->vrfy) {
-                if (PEAR::isError($res = $this->_smtp->vrfy($rcpt))) {
+                $res = $this->_smtp->vrfy($rcpt);
+                if (is_a($res, 'PEAR_Error')) {
                     $info = array('rcpt' => $rcpt);
                     return $this->_raiseError('failed_vrfy_rcpt', $info);
                 }
@@ -325,21 +335,24 @@ class Mail_smtpmx extends Mail {
 
             // mail from:
             $args['verp'] = $this->verp;
-            if (PEAR::isError($res = $this->_smtp->mailFrom($from, $args))) {
+            $res = $this->_smtp->mailFrom($from, $args);
+            if (is_a($res, 'PEAR_Error')) {
                 $info = array('from' => $from);
                 return $this->_raiseError('failed_set_from', $info);
             }
 
             // rcpt to:
-            if (PEAR::isError($res = $this->_smtp->rcptTo($rcpt))) {
+            $res = $this->_smtp->rcptTo($rcpt);
+            if (is_a($res, 'PEAR_Error')) {
                 $info = array('rcpt' => $rcpt);
                 return $this->_raiseError('failed_set_rcpt', $info);
             }
 
-            // don't send anything in test mode
+            // Don't send anything in test mode
             if ($this->test) {
                 $result = $this->_smtp->rset();
-                if (PEAR::isError($res = $this->_smtp->rset())) {
+                $res = $this->_smtp->rset();
+                if (is_a($res, 'PEAR_Error')) {
                     return $this->_raiseError('failed_rset');
                 }
 
@@ -348,8 +361,9 @@ class Mail_smtpmx extends Mail {
                 return true;
             }
 
-            // send data
-            if (PEAR::isError($res = $this->_smtp->data("$textHeaders\r\n$body"))) {
+            // Send data
+            $res = $this->_smtp->data("$textHeaders\r\n$body");
+            if (is_a($res, 'PEAR_Error')) {
                 $info = array('rcpt' => $rcpt);
                 return $this->_raiseError('failed_send_data', $info);
             }
@@ -376,7 +390,7 @@ class Mail_smtpmx extends Mail {
 
         if ($this->withNetDns) {
             $res = $this->_loadNetDns();
-            if (PEAR::isError($res)) {
+            if (is_a($res, 'PEAR_Error')) {
                 return $res;
             }
 

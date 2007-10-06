@@ -104,15 +104,23 @@ class Mail_sendmail extends Mail {
      */
     function send($recipients, $headers, $body)
     {
+        if (!is_array($headers)) {
+            return PEAR::raiseError('$headers must be an array');
+        }
+
+        $result = $this->_sanitizeHeaders($headers);
+        if (is_a($result, 'PEAR_Error')) {
+            return $result;
+        }
+
         $recipients = $this->parseRecipients($recipients);
-        if (PEAR::isError($recipients)) {
+        if (is_a($recipients, 'PEAR_Error')) {
             return $recipients;
         }
         $recipients = escapeShellCmd(implode(' ', $recipients));
 
-        $this->_sanitizeHeaders($headers);
         $headerElements = $this->prepareHeaders($headers);
-        if (PEAR::isError($headerElements)) {
+        if (is_a($headerElements, 'PEAR_Error')) {
             return $headerElements;
         }
         list($from, $text_headers) = $headerElements;

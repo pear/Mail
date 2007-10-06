@@ -89,7 +89,14 @@ class Mail_mail extends Mail {
      */
     function send($recipients, $headers, $body)
     {
-        $this->_sanitizeHeaders($headers);
+        if (!is_array($headers)) {
+            return PEAR::raiseError('$headers must be an array');
+        }
+
+        $result = $this->_sanitizeHeaders($headers);
+        if (is_a($result, 'PEAR_Error')) {
+            return $result;
+        }
 
         // If we're passed an array of recipients, implode it.
         if (is_array($recipients)) {
@@ -110,7 +117,7 @@ class Mail_mail extends Mail {
 
         // Flatten the headers out.
         $headerElements = $this->prepareHeaders($headers);
-        if (PEAR::isError($headerElements)) {
+        if (is_a($headerElements, 'PEAR_Error')) {
             return $headerElements;
         }
         list(, $text_headers) = $headerElements;

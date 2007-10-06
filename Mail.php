@@ -88,7 +88,14 @@ class Mail
      */
     function send($recipients, $headers, $body)
     {
-        $this->_sanitizeHeaders($headers);
+        if (!is_array($headers)) {
+            return PEAR::raiseError('$headers must be an array');
+        }
+
+        $result = $this->_sanitizeHeaders($headers);
+        if (is_a($result, 'PEAR_Error')) {
+            return $result;
+        }
 
         // if we're passed an array of recipients, implode it.
         if (is_array($recipients)) {
@@ -107,7 +114,6 @@ class Mail
         list(, $text_headers) = Mail::prepareHeaders($headers);
 
         return mail($recipients, $subject, $body, $text_headers);
-
     }
 
     /**
@@ -154,7 +160,7 @@ class Mail
                 include_once 'Mail/RFC822.php';
                 $parser = new Mail_RFC822();
                 $addresses = $parser->parseAddressList($value, 'localhost', false);
-                if (PEAR::isError($addresses)) {
+                if (is_a($addresses, 'PEAR_Error')) {
                     return $addresses;
                 }
 
@@ -222,7 +228,7 @@ class Mail
         $addresses = Mail_RFC822::parseAddressList($recipients, 'localhost', false);
 
         // If parseAddressList() returned a PEAR_Error object, just return it.
-        if (PEAR::isError($addresses)) {
+        if (is_a($addresses, 'PEAR_Error')) {
             return $addresses;
         }
 

@@ -5,7 +5,7 @@ Mail_RFC822: Address Parsing
 require_once 'Mail/RFC822.php';
 
 $parser = &new Mail_RFC822();
- 
+
 /* A simple, bare address. */
 $address = 'user@example.com';
 print_r($parser->parseAddressList($address, null, true, true));
@@ -21,19 +21,19 @@ print_r($parser->parseAddressList($address, null, true, true));
 /* An invalid address with spaces in the local part. */
 $address = '<Jon Parise@php.net>';
 $result = $parser->parseAddressList($address, null, true, true);
-if (PEAR::isError($result)) echo $result->getMessage() . "\n";
+if (is_a($result, 'PEAR_Error')) echo $result->getMessage() . "\n";
 
 /* A valid address with an uncommon TLD. */
 $address = 'jon@host.longtld';
 $result = $parser->parseAddressList($address, null, true, true);
-if (PEAR::isError($result)) echo $result->getMessage() . "\n";
+if (is_a($result, 'PEAR_Error')) echo $result->getMessage() . "\n";
 
 --EXPECT--
 Array
 (
     [0] => stdClass Object
         (
-            [personal] => 
+            [personal] =>
             [comment] => Array
                 (
                 )
@@ -64,7 +64,7 @@ Array
 
                     [1] => stdClass Object
                         (
-                            [personal] => 
+                            [personal] =>
                             [comment] => Array
                                 (
                                     [0] => Ted Bloggs
@@ -76,7 +76,7 @@ Array
 
                     [2] => stdClass Object
                         (
-                            [personal] => 
+                            [personal] =>
                             [comment] => Array
                                 (
                                 )
@@ -94,7 +94,7 @@ Array
 (
     [0] => stdClass Object
         (
-            [personal] => 
+            [personal] =>
             [comment] => Array
                 (
                 )

@@ -18,7 +18,8 @@ $params = array('host' => 'bogus.host.tld');
 $mailer = &Mail::factory('smtp', $params);
 
 /* Attempt to send an empty message in order to trigger an error. */
-if (PEAR::isError($e = $mailer->send(array(), array(), ''))) {
+$e = $mailer->send(array(), array(), '');
+if (is_a($e, 'PEAR_Error')) {
     die($e->getMessage() . "\n");
 }
 
