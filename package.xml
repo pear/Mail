@@ -39,6 +39,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <dir name="/">
    <dir name="Mail">
     <file name="mail.php" role="php" />
+    <file name="mock.php" role="php" />
     <file name="null.php" role="php" />
     <file name="RFC822.php" role="php" />
     <file name="sendmail.php" role="php" />
