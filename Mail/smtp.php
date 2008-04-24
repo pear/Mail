@@ -55,6 +55,13 @@ class Mail_smtp extends Mail {
     var $_smtp = null;
 
     /**
+     * The list of service extension parameters to pass to the Net_SMTP
+     * mailFrom() command.
+     * @var array
+     */
+    var $_extparams = array();
+
+    /**
      * The SMTP host to connect to.
      * @var string
      */
@@ -107,14 +114,6 @@ class Mail_smtp extends Mail {
     var $timeout = null;
 
     /**
-     * Whether to use VERP or not. If not a boolean, the string value
-     * will be used as the VERP separators.
-     *
-     * @var mixed boolean or string
-     */
-    var $verp = false;
-
-    /**
      * Turn on Net_SMTP debugging?
      *
      * @var boolean $debug
@@ -150,6 +149,7 @@ class Mail_smtp extends Mail {
      *     localhost   The local hostname / domain. Defaults to localhost.
      *     timeout     The SMTP connection timeout. Defaults to none.
      *     verp        Whether to use VERP or not. Defaults to false.
+     *                 DEPRECATED as of 1.2.0 (use setMailParams()).
      *     debug       Activate SMTP debug mode? Defaults to false.
      *     persist     Should the SMTP connection persist?
      *     pipelining  Use SMTP command pipelining
@@ -170,10 +170,14 @@ class Mail_smtp extends Mail {
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
         if (isset($params['timeout'])) $this->timeout = $params['timeout'];
-        if (isset($params['verp'])) $this->verp = $params['verp'];
         if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
         if (isset($params['persist'])) $this->persist = (bool)$params['persist'];
         if (isset($params['pipelining'])) $this->pipelining = (bool)$params['pipelining'];
+
+        // Deprecated options
+        if (isset($params['verp'])) {
+            $this->addServiceExtensionParameter('XVERP', is_bool($params['verp']) ? null : $params['verp']);
+        }
 
         register_shutdown_function(array(&$this, '_Mail_smtp'));
     }
@@ -204,7 +208,7 @@ class Mail_smtp extends Mail {
      *              test'.
      *
      * @param string $body The full text of the message body, including any
-     *               Mime parts, etc.
+     *               MIME parts, etc.
      *
      * @return mixed Returns true on success, or a PEAR_Error
      *               containing a descriptive error message on
@@ -216,47 +220,9 @@ class Mail_smtp extends Mail {
         include_once 'Net/SMTP.php';
 
         /* If we don't already have an SMTP object, create one. */
-        if (is_object($this->_smtp) === false) {
-            $this->_smtp = new Net_SMTP($this->host, $this->port,
-                                        $this->localhost);
-
-            /* If we still don't have an SMTP object at this point, fail. */
-            if (is_object($this->_smtp) === false) {
-                return PEAR::raiseError('Failed to create a Net_SMTP object',
-                                        PEAR_MAIL_SMTP_ERROR_CREATE);
-            }
-
-            if (isset($this->pipelining)) {
-                $this->_smtp->pipelining = $this->pipelining;
-            }
-
-            /* Configure the SMTP connection. */
-            if ($this->debug) {
-                $this->_smtp->setDebug(true);
-            }
-
-            /* Attempt to connect to the configured SMTP server. */
-            $res = $this->_smtp->connect($this->timeout);
-            if (is_a($res, 'PEAR_Error')) {
-                $error = $this->_error('Failed to connect to ' .
-                                       $this->host . ':' . $this->port,
-                                       $res);
-                return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_CONNECT);
-            }
-
-            /* Attempt to authenticate if authentication has been enabled. */
-            if ($this->auth) {
-                $method = is_string($this->auth) ? $this->auth : '';
-
-                $res = $this->_smtp->auth($this->username,
-                                          $this->password,
-                                          $method);
-                if (is_a($res, 'PEAR_Error')) {
-                    $error = $this->_error("$method authentication failure", $res);
-                    $this->_smtp->rset();
-                    return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
-                }
-            }
+        $result = &$this->getSMTPObject();
+        if (PEAR::isError($result)) {
+            return $result;
         }
 
         if (!is_array($headers)) {
@@ -288,9 +254,13 @@ class Mail_smtp extends Mail {
                                     PEAR_MAIL_SMTP_ERROR_FROM);
         }
 
-        $args['verp'] = $this->verp;
-        $res = $this->_smtp->mailFrom($from, $args);
-        if (is_a($res, 'PEAR_Error')) {
+        $params = null;
+        if (!empty($this->_extparams)) {
+            foreach ($this->_extparams as $key => $val) {
+                $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
+            }
+        }
+        if (PEAR::isError($res = $this->_smtp->mailFrom($from, $params))) {
             $error = $this->_error("Failed to set sender: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
@@ -325,6 +295,76 @@ class Mail_smtp extends Mail {
         }
 
         return true;
+    }
+
+    /**
+     * Connect to the SMTP server by instantiating a Net_SMTP object.
+     *
+     * @return mixed Returns a reference to the Net_SMTP object on success, or
+     *               a PEAR_Error containing a descriptive error message on
+     *               failure.
+     *
+     * @since  1.2.0
+     * @access public
+     */
+    function &getSMTPObject()
+    {
+        if (is_object($this->_smtp) !== false) {
+            return $this->_smtp;
+        }
+
+        $this->_smtp = &new Net_SMTP($this->host,
+                                     $this->port,
+                                     $this->localhost);
+
+        /* If we still don't have an SMTP object at this point, fail. */
+        if (is_object($this->_smtp) === false) {
+            return PEAR::raiseError('Failed to create a Net_SMTP object',
+                                    PEAR_MAIL_SMTP_ERROR_CREATE);
+        }
+
+        /* Configure the SMTP connection. */
+        if ($this->debug) {
+            $this->_smtp->setDebug(true);
+        }
+
+        /* Attempt to connect to the configured SMTP server. */
+        if (PEAR::isError($res = $this->_smtp->connect($this->timeout))) {
+            $error = $this->_error('Failed to connect to ' .
+                                   $this->host . ':' . $this->port,
+                                   $res);
+            return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_CONNECT);
+        }
+
+        /* Attempt to authenticate if authentication has been enabled. */
+        if ($this->auth) {
+            $method = is_string($this->auth) ? $this->auth : '';
+
+            if (PEAR::isError($res = $this->_smtp->auth($this->username,
+                                                        $this->password,
+                                                        $method))) {
+                $error = $this->_error("$method authentication failure",
+                                       $res);
+                $this->_smtp->rset();
+                return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
+            }
+        }
+
+        return $this->_smtp;
+    }
+
+    /**
+     * Add parameter associated with a SMTP service extension.
+     *
+     * @param string Extension keyword.
+     * @param string Any value the keyword needs.
+     *
+     * @since 1.2.0
+     * @access public
+     */
+    function addServiceExtensionParameter($keyword, $value = null)
+    {
+        $this->_extparams[$keyword] = $value;
     }
 
     /**
@@ -363,11 +403,9 @@ class Mail_smtp extends Mail {
         list($code, $response) = $this->_smtp->getResponse();
 
         /* Build our standardized error string. */
-        $msg = $text;
-        $msg .= ' [SMTP: ' . $error->getMessage();
-        $msg .= " (code: $code, response: $response)]";
-
-        return $msg;
+        return $text
+            . ' [SMTP: ' . $error->getMessage()
+            . " (code: $code, response: $response)]";
     }
 
 }
