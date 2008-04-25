@@ -20,10 +20,10 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2008-04-24</date>
+ <date>2008-04-25</date>
  <time>22:36:00</time>
  <version>
-  <release>1.2.0a1</release>
+  <release>1.2.0a2</release>
   <api>1.2.0</api>
  </version>
  <stability>
@@ -31,8 +31,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <api>alpha</api>
  </stability>
  <license>PHP/BSD</license>
- <notes>- Add addServiceExtensionParameter() to the SMTP driver (slusarz@curecanti.org, Bug #13764).
-- Add a method to obtain the Net_SMTP object from the SMTP driver (slusarz@curecanti.org, Bug #13766).
+ <notes>- Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
  </notes>
  <contents>
   <dir name="/">

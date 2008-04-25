@@ -217,8 +217,6 @@ class Mail_smtp extends Mail {
      */
     function send($recipients, $headers, $body)
     {
-        include_once 'Net/SMTP.php';
-
         /* If we don't already have an SMTP object, create one. */
         $result = &$this->getSMTPObject();
         if (PEAR::isError($result)) {
@@ -229,10 +227,7 @@ class Mail_smtp extends Mail {
             return PEAR::raiseError('$headers must be an array');
         }
 
-        $result = $this->_sanitizeHeaders($headers);
-        if (is_a($result, 'PEAR_Error')) {
-            return $result;
-        }
+        $this->_sanitizeHeaders($headers);
 
         $headerElements = $this->prepareHeaders($headers);
         if (is_a($headerElements, 'PEAR_Error')) {
@@ -260,7 +255,7 @@ class Mail_smtp extends Mail {
                 $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
             }
         }
-        if (PEAR::isError($res = $this->_smtp->mailFrom($from, $params))) {
+        if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params)))) {
             $error = $this->_error("Failed to set sender: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
@@ -313,6 +308,7 @@ class Mail_smtp extends Mail {
             return $this->_smtp;
         }
 
+        include_once 'Net/SMTP.php';
         $this->_smtp = &new Net_SMTP($this->host,
                                      $this->port,
                                      $this->localhost);
