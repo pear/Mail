@@ -342,22 +342,39 @@ class Mail_RFC822 {
     }
 
     /**
-     * Checks if a string has an unclosed quotes or not.
+     * Checks if a string has unclosed quotes or not.
      *
      * @access private
-     * @param string $string The string to check.
-     * @return boolean True if there are unclosed quotes inside the string, false otherwise.
+     * @param string $string  The string to check.
+     * @return boolean  True if there are unclosed quotes inside the string,
+     *                  false otherwise.
      */
     function _hasUnclosedQuotes($string)
     {
-        $string     = explode('"', $string);
-        $string_cnt = count($string);
+        $string = trim($string);
+        $iMax = strlen($string);
+        $in_quote = false;
+        $i = $slashes = 0;
 
-        for ($i = 0; $i < (count($string) - 1); $i++)
-            if (substr($string[$i], -1) == '\\')
-                $string_cnt--;
+        for (; $i < $iMax; ++$i) {
+            switch ($string[$i]) {
+            case '\\':
+                ++$slashes;
+                break;
 
-        return ($string_cnt % 2 === 0);
+            case '"':
+                if ($slashes % 2 == 0) {
+                    $in_quote = !$in_quote;
+                }
+                // Fall through to default action below.
+
+            default:
+                $slashes = 0;
+                break;
+            }
+        }
+
+        return $in_quote;
     }
 
     /**

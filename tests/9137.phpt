@@ -9,6 +9,8 @@ require_once 'PEAR.php';
 $addresses = array(
     array('name' => 'John Doe', 'email' => 'test@example.com'),
     array('name' => 'John Doe\\', 'email' => 'test@example.com'),
+    array('name' => 'John "Doe', 'email' => 'test@example.com'),
+    array('name' => 'John "Doe\\', 'email' => 'test@example.com'),
 );
 
 for ($i = 0; $i < count($addresses); $i++) {
@@ -27,3 +29,5 @@ for ($i = 0; $i < count($addresses); $i++) {
 --EXPECT--
 "John Doe" <test@example.com> :: Parsed
 "John Doe\\" <test@example.com> :: Parsed
+"John \"Doe" <test@example.com> :: Parsed
+"John \"Doe\\" <test@example.com> :: Parsed
