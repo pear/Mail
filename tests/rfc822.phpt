@@ -33,7 +33,7 @@ Array
 (
     [0] => stdClass Object
         (
-            [personal] =>
+            [personal] => 
             [comment] => Array
                 (
                 )
@@ -64,7 +64,7 @@ Array
 
                     [1] => stdClass Object
                         (
-                            [personal] =>
+                            [personal] => 
                             [comment] => Array
                                 (
                                     [0] => Ted Bloggs
@@ -76,7 +76,7 @@ Array
 
                     [2] => stdClass Object
                         (
-                            [personal] =>
+                            [personal] => 
                             [comment] => Array
                                 (
                                 )
@@ -94,7 +94,7 @@ Array
 (
     [0] => stdClass Object
         (
-            [personal] =>
+            [personal] => 
             [comment] => Array
                 (
                 )
