@@ -20,18 +20,18 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2008-04-25</date>
- <time>22:36:00</time>
+ <date>2008-07-02</date>
+ <time>00:00:00</time>
  <version>
-  <release>1.2.0a2</release>
-  <api>1.2.0</api>
+  <release>1.2.0b1</release>
+  <api>1.2.0b1</api>
  </version>
  <stability>
-  <release>alpha</release>
-  <api>alpha</api>
+  <release>beta</release>
+  <api>beta</api>
  </stability>
  <license>PHP/BSD</license>
- <notes>- Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
+ <notes>- _hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
  </notes>
  <contents>
   <dir name="/">
