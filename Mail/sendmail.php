@@ -141,7 +141,8 @@ class Mail_sendmail extends Mail {
             return PEAR::raiseError('From address specified with dangerous characters.');
         }
 
-        $from = escapeShellCmd($from);
+        $from = escapeshellarg($from); // Security bug #16200
+        
         $mail = @popen($this->sendmail_path . (!empty($this->sendmail_args) ? ' ' . $this->sendmail_args : '') . " -f$from -- $recipients", 'w');
         if (!$mail) {
             return PEAR::raiseError('Failed to open sendmail [' . $this->sendmail_path . '] for execution.');
