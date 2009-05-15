@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.6.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
-http://pear.php.net/dtd/tasks-1.0.xsd
-http://pear.php.net/dtd/package-2.0
-http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Mail</name>
  <channel>pear.php.net</channel>
  <summary>Class that provides multiple interfaces for sending emails</summary>
- <description>PEAR&apos;s Mail package defines an interface for implementing mailers under the PEAR hierarchy.  It also provides supporting functions useful to multiple mailer backends.  Currently supported backends include: PHP&apos;s native mail() function, sendmail, and SMTP.  This package also provides a RFC822 email address list validation utility class.
- </description>
+ <description>PEAR&apos;s Mail package defines an interface for implementing mailers under the PEAR hierarchy.  It also provides supporting functions useful to multiple mailer backends.  Currently supported backends include: PHP&apos;s native mail() function, sendmail, and SMTP.  This package also provides a RFC822 email address list validation utility class.</description>
  <lead>
   <name>Chuck Hagenbuch</name>
   <user>chagenbu</user>
@@ -20,36 +16,34 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2008-07-02</date>
- <time>00:00:00</time>
+ <date>2009-05-15</date>
+ <time>00:19:34</time>
  <version>
-  <release>1.2.0b1</release>
-  <api>1.2.0b1</api>
+  <release>1.2.0b2</release>
+  <api>1.2.0</api>
  </version>
  <stability>
   <release>beta</release>
   <api>beta</api>
  </stability>
  <license>PHP/BSD</license>
- <notes>- _hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
- </notes>
+ <notes>QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File</notes>
  <contents>
-  <dir name="/">
-   <dir name="Mail">
-    <file name="mail.php" role="php" />
-    <file name="mock.php" role="php" />
-    <file name="null.php" role="php" />
-    <file name="RFC822.php" role="php" />
-    <file name="sendmail.php" role="php" />
-    <file name="smtp.php" role="php" />
-    <file name="smtpmx.php" role="php" />
-   </dir> <!-- /Mail -->
-   <dir name="tests">
-    <file name="rfc822.phpt" role="test" />
-    <file name="smtp_error.phpt" role="test" />
-   </dir> <!-- /tests -->
-   <file name="Mail.php" role="php" />
-  </dir> <!-- / -->
+  <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" md5sum="4ec7549784d3f445326edbdf3ef1b594" name="Mail/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="9c183572c26036f734db4e4ede109c1b" name="Mail/mock.php" role="php" />
+   <file baseinstalldir="/" md5sum="26258bd4f4ba1a78b773e3ee912e231d" name="Mail/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="05a8507d7b58df5aef6d6be5e96a41bc" name="Mail/RFC822.php" role="php" />
+   <file baseinstalldir="/" md5sum="adb2fa2ab95019ed752cbc76da384afb" name="Mail/sendmail.php" role="php" />
+   <file baseinstalldir="/" md5sum="d2b7df59615a335cb621e7bb63b20890" name="Mail/smtp.php" role="php" />
+   <file baseinstalldir="/" md5sum="477039284d0d1f3bc7e4988fa107a018" name="Mail/smtpmx.php" role="php" />
+   <file baseinstalldir="/" md5sum="cc1478e391038db8574d813f6b50ea6b" name="tests/9137.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="3a33c51783820167b5c8a7163a575d67" name="tests/9137_2.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="d5712a0c9bab8aa7dedaf84cb92bd97b" name="tests/rfc822.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="69ad246b13148b7a756408c6cb5f8a1d" name="tests/smtp_error.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="c729c9356371b1661b71f08d5c243197" name="tests/validateQuotedString.php" role="test" />
+   <file baseinstalldir="/" md5sum="3a9d6b89a9bd0cc4de67558324f2ccde" name="Mail.php" role="php" />
+  </dir>
  </contents>
  <dependencies>
   <required>
@@ -69,4 +63,19 @@ http://pear.php.net/dtd/package-2.0.xsd">
   </optional>
  </dependencies>
  <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>1.2.0b2</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2009-05-15</date>
+   <license>PHP/BSD</license>
+   <notes>Bug #16200 - Security hole allow to read/write Arbitrary File</notes>
+  </release>
+ </changelog>
 </package>
