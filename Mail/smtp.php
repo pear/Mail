@@ -278,6 +278,16 @@ class Mail_smtp extends Mail {
 
         /* Send the message's headers and the body as SMTP data. */
         $res = $this->_smtp->data($textHeaders . "\r\n\r\n" . $body);
+		list(,$args) = $this->_smtp->getResponse();
+
+		if (preg_match("/Ok: queued as (.*)/", $args, $queued)) {
+			$this->queued_as = $queued[1];
+		}
+
+		/* we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
+		 * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email */
+		$this->greeting = $this->_smtp->getGreeting();
+
         if (is_a($res, 'PEAR_Error')) {
             $error = $this->_error('Failed to send data', $res);
             $this->_smtp->rset();
