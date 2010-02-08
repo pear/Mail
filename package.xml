@@ -17,7 +17,7 @@
   <active>yes</active>
  </developer>
  <date>2010-02-08</date>
- <time>08:18:52</time>
+ <time>08:23:26</time>
  <version>
   <release>1.2.0b4</release>
   <api>1.2.0</api>
@@ -29,18 +29,20 @@
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
  <notes>
 Doc Bug #15620 Licence change to BSD
+Bug #13659 Mail parse error in special condition
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="d62cfef4d02b8bde7c3b11f471a1bf0d" name="Mail/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="e62242ee61424b4d411d529dd96f81fc" name="Mail/mock.php" role="php" />
    <file baseinstalldir="/" md5sum="491cd8ec1c21f6b9f3abc1275674a94f" name="Mail/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="597cf3039d34db93804445f2569c1088" name="Mail/RFC822.php" role="php" />
+   <file baseinstalldir="/" md5sum="78bbbbcfa43f8b4ed15672260e1be4b5" name="Mail/RFC822.php" role="php" />
    <file baseinstalldir="/" md5sum="d4a1e4fc589b2f7c82d90ea0dcf0bd55" name="Mail/sendmail.php" role="php" />
    <file baseinstalldir="/" md5sum="82025c30721a834339e2015c14b5a55a" name="Mail/smtp.php" role="php" />
    <file baseinstalldir="/" md5sum="d1065ac9aec1e1a4a49d89d6336be0e7" name="Mail/smtpmx.php" role="php" />
    <file baseinstalldir="/" md5sum="cc1478e391038db8574d813f6b50ea6b" name="tests/9137.phpt" role="test" />
    <file baseinstalldir="/" md5sum="3a33c51783820167b5c8a7163a575d67" name="tests/9137_2.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="3659ceda2b94b66892869fa1ca12ada1" name="tests/13659.phpt" role="test" />
    <file baseinstalldir="/" md5sum="d5712a0c9bab8aa7dedaf84cb92bd97b" name="tests/rfc822.phpt" role="test" />
    <file baseinstalldir="/" md5sum="69ad246b13148b7a756408c6cb5f8a1d" name="tests/smtp_error.phpt" role="test" />
    <file baseinstalldir="/" md5sum="c729c9356371b1661b71f08d5c243197" name="tests/validateQuotedString.php" role="test" />
@@ -109,6 +111,7 @@ QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
    <notes>
 Doc Bug #15620 Licence change to BSD
+Bug #13659 Mail parse error in special condition
    </notes>
   </release>
  </changelog>
