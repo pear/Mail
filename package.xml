@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Mail</name>
  <channel>pear.php.net</channel>
  <summary>Class that provides multiple interfaces for sending emails</summary>
@@ -16,10 +16,10 @@
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2009-05-15</date>
- <time>00:19:34</time>
+ <date>2010-02-08</date>
+ <time>08:05:15</time>
  <version>
-  <release>1.2.0b2</release>
+  <release>1.2.0b3</release>
   <api>1.2.0</api>
  </version>
  <stability>
@@ -27,22 +27,24 @@
   <api>beta</api>
  </stability>
  <license>PHP/BSD</license>
- <notes>QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File</notes>
+ <notes>
+QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File
+ </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="4ec7549784d3f445326edbdf3ef1b594" name="Mail/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="9c183572c26036f734db4e4ede109c1b" name="Mail/mock.php" role="php" />
-   <file baseinstalldir="/" md5sum="26258bd4f4ba1a78b773e3ee912e231d" name="Mail/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="05a8507d7b58df5aef6d6be5e96a41bc" name="Mail/RFC822.php" role="php" />
-   <file baseinstalldir="/" md5sum="adb2fa2ab95019ed752cbc76da384afb" name="Mail/sendmail.php" role="php" />
-   <file baseinstalldir="/" md5sum="d2b7df59615a335cb621e7bb63b20890" name="Mail/smtp.php" role="php" />
-   <file baseinstalldir="/" md5sum="477039284d0d1f3bc7e4988fa107a018" name="Mail/smtpmx.php" role="php" />
+   <file baseinstalldir="/" md5sum="e159ef482b91a7312169a9c19e8d0708" name="Mail/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="cf534664656c35891bfda3d6377a887d" name="Mail/mock.php" role="php" />
+   <file baseinstalldir="/" md5sum="ea2cc76442c482c5b2739d160c75a8b6" name="Mail/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="eb90d4a2fdc33730e3d9e65a648654bc" name="Mail/RFC822.php" role="php" />
+   <file baseinstalldir="/" md5sum="d4a1e4fc589b2f7c82d90ea0dcf0bd55" name="Mail/sendmail.php" role="php" />
+   <file baseinstalldir="/" md5sum="433b080ff028efeb2793a5438158e3bd" name="Mail/smtp.php" role="php" />
+   <file baseinstalldir="/" md5sum="82055776ac74da8a1171d30513779d6d" name="Mail/smtpmx.php" role="php" />
    <file baseinstalldir="/" md5sum="cc1478e391038db8574d813f6b50ea6b" name="tests/9137.phpt" role="test" />
    <file baseinstalldir="/" md5sum="3a33c51783820167b5c8a7163a575d67" name="tests/9137_2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="d5712a0c9bab8aa7dedaf84cb92bd97b" name="tests/rfc822.phpt" role="test" />
    <file baseinstalldir="/" md5sum="69ad246b13148b7a756408c6cb5f8a1d" name="tests/smtp_error.phpt" role="test" />
    <file baseinstalldir="/" md5sum="c729c9356371b1661b71f08d5c243197" name="tests/validateQuotedString.php" role="test" />
-   <file baseinstalldir="/" md5sum="3a9d6b89a9bd0cc4de67558324f2ccde" name="Mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="16df06720d9c2afd7afd97fcb4ed3e4a" name="Mail.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -75,7 +77,24 @@
    </stability>
    <date>2009-05-15</date>
    <license>PHP/BSD</license>
-   <notes>Bug #16200 - Security hole allow to read/write Arbitrary File</notes>
+   <notes>
+Bug #16200 - Security hole allow to read/write Arbitrary File
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0b3</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-02-08</date>
+   <license>PHP/BSD</license>
+   <notes>
+QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File
+   </notes>
   </release>
  </changelog>
 </package>
