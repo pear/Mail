@@ -646,8 +646,8 @@ class Mail_RFC822 {
                 $comment    = $this->_splitCheck($parts, ')');
                 $comments[] = $comment;
 
-                // +1 is for the trailing )
-                $_mailbox   = substr($_mailbox, strpos($_mailbox, $comment)+strlen($comment)+1);
+                // +2 is for the brackets
+                $_mailbox = substr($_mailbox, strpos($_mailbox, '('.$comment)+strlen($comment)+2);
             } else {
                 break;
             }
