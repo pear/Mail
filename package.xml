@@ -16,10 +16,10 @@
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2010-02-08</date>
- <time>08:23:26</time>
+ <date>2010-02-09</date>
+ <time>04:00:28</time>
  <version>
-  <release>1.2.0b4</release>
+  <release>1.2.0b5</release>
   <api>1.2.0</api>
  </version>
  <stability>
@@ -28,8 +28,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
  <notes>
-Doc Bug #15620 Licence change to BSD
-Bug #13659 Mail parse error in special condition
+QA release.
+Updated minimum dependencies (Net_SMTP, PEAR, PHP)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -52,17 +52,17 @@ Bug #13659 Mail parse error in special condition
  <dependencies>
   <required>
    <php>
-    <min>4.0.0</min>
+    <min>4.4.9</min>
    </php>
    <pearinstaller>
-    <min>1.4.0b1</min>
+    <min>1.5.6</min>
    </pearinstaller>
   </required>
   <optional>
    <package>
     <name>Net_SMTP</name>
     <channel>pear.php.net</channel>
-    <min>1.1.0</min>
+    <min>1.4.1</min>
    </package>
   </optional>
  </dependencies>
@@ -112,6 +112,22 @@ QA Release. Bug #16200 - Security hole allow to read/write Arbitrary File
    <notes>
 Doc Bug #15620 Licence change to BSD
 Bug #13659 Mail parse error in special condition
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0b5</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>beta</api>
+   </stability>
+   <date>2010-02-09</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+   <notes>
+QA release.
+Updated minimum dependencies (Net_SMTP, PEAR, PHP)
    </notes>
   </release>
  </changelog>
