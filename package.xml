@@ -17,19 +17,27 @@
   <active>yes</active>
  </developer>
  <date>2010-02-09</date>
- <time>04:00:28</time>
+ <time>06:35:39</time>
  <version>
-  <release>1.2.0b5</release>
+  <release>1.2.0</release>
   <api>1.2.0</api>
  </version>
  <stability>
-  <release>beta</release>
-  <api>beta</api>
+  <release>stable</release>
+  <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
  <notes>
-QA release.
+QA release - stable.
+
 Updated minimum dependencies (Net_SMTP, PEAR, PHP)
+Doc Bug #15620 Licence change to BSD
+Bug #13659 Mail parse error in special condition
+Bug #16200 - Security hole allow to read/write Arbitrary File
+_hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
+Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
+Add addServiceExtensionParameter() to the SMTP driver (slusarz@curecanti.org, Bug #13764).
+Add a method to obtain the Net_SMTP object from the SMTP driver (slusarz@curecanti.org, Bug #13766).
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -128,6 +136,30 @@ Bug #13659 Mail parse error in special condition
    <notes>
 QA release.
 Updated minimum dependencies (Net_SMTP, PEAR, PHP)
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>1.2.0</release>
+    <api>1.2.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-02-09</date>
+   <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+   <notes>
+QA release - stable.
+
+Updated minimum dependencies (Net_SMTP, PEAR, PHP)
+Doc Bug #15620 Licence change to BSD
+Bug #13659 Mail parse error in special condition
+Bug #16200 - Security hole allow to read/write Arbitrary File
+_hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
+Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
+Add addServiceExtensionParameter() to the SMTP driver (slusarz@curecanti.org, Bug #13764).
+Add a method to obtain the Net_SMTP object from the SMTP driver (slusarz@curecanti.org, Bug #13766).
    </notes>
   </release>
  </changelog>
