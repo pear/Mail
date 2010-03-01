@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0RC1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>Mail</name>
  <channel>pear.php.net</channel>
  <summary>Class that provides multiple interfaces for sending emails</summary>
@@ -16,8 +16,8 @@
   <email>richard@phpguru.org</email>
   <active>yes</active>
  </developer>
- <date>2010-02-09</date>
- <time>06:35:39</time>
+ <date>2010-03-01</date>
+ <time>22:16:48</time>
  <version>
   <release>1.2.0</release>
   <api>1.2.0</api>
@@ -34,27 +34,27 @@ Updated minimum dependencies (Net_SMTP, PEAR, PHP)
 Doc Bug #15620 Licence change to BSD
 Bug #13659 Mail parse error in special condition
 Bug #16200 - Security hole allow to read/write Arbitrary File
-_hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
+_hasUnclosedQuotes() doesn&apos;t properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
 Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
 Add addServiceExtensionParameter() to the SMTP driver (slusarz@curecanti.org, Bug #13764).
 Add a method to obtain the Net_SMTP object from the SMTP driver (slusarz@curecanti.org, Bug #13766).
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="d62cfef4d02b8bde7c3b11f471a1bf0d" name="Mail/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="e62242ee61424b4d411d529dd96f81fc" name="Mail/mock.php" role="php" />
-   <file baseinstalldir="/" md5sum="491cd8ec1c21f6b9f3abc1275674a94f" name="Mail/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="78bbbbcfa43f8b4ed15672260e1be4b5" name="Mail/RFC822.php" role="php" />
-   <file baseinstalldir="/" md5sum="d4a1e4fc589b2f7c82d90ea0dcf0bd55" name="Mail/sendmail.php" role="php" />
-   <file baseinstalldir="/" md5sum="82025c30721a834339e2015c14b5a55a" name="Mail/smtp.php" role="php" />
-   <file baseinstalldir="/" md5sum="d1065ac9aec1e1a4a49d89d6336be0e7" name="Mail/smtpmx.php" role="php" />
-   <file baseinstalldir="/" md5sum="cc1478e391038db8574d813f6b50ea6b" name="tests/9137.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="3a33c51783820167b5c8a7163a575d67" name="tests/9137_2.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="1aaa32cd73663461471b7c664bf1ddbb" name="Mail/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="b518286839921f8f0e6ee520374cc973" name="Mail/mock.php" role="php" />
+   <file baseinstalldir="/" md5sum="5f21af8a5d846e844ac7e525bcf2d8be" name="Mail/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="2afca6e3415490de821b280b1e2cb0a6" name="Mail/RFC822.php" role="php" />
+   <file baseinstalldir="/" md5sum="b206391834f425f9a934b8f702b1847a" name="Mail/sendmail.php" role="php" />
+   <file baseinstalldir="/" md5sum="479aa21ec86e63e629db646ed292b142" name="Mail/smtp.php" role="php" />
+   <file baseinstalldir="/" md5sum="74e13bbc352601c9529c21e1e18f5b69" name="Mail/smtpmx.php" role="php" />
+   <file baseinstalldir="/" md5sum="d66aa2a2f0bfe33f8a67d749a1a4d345" name="tests/9137.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="75d10361f686f1cc16637a9364e3eab7" name="tests/9137_2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="3659ceda2b94b66892869fa1ca12ada1" name="tests/13659.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="d5712a0c9bab8aa7dedaf84cb92bd97b" name="tests/rfc822.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="69ad246b13148b7a756408c6cb5f8a1d" name="tests/smtp_error.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="c729c9356371b1661b71f08d5c243197" name="tests/validateQuotedString.php" role="test" />
-   <file baseinstalldir="/" md5sum="ce9172384f0a25888d43030580ee4204" name="Mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="bbd88a5dfb0536a8c66ba07a1fbda382" name="tests/rfc822.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="4c8cad5cc0e546afee8c5e9d06f2cf03" name="tests/smtp_error.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="fa4c53e482ff0c7af2bcbaffb090320c" name="tests/validateQuotedString.php" role="test" />
+   <file baseinstalldir="/" md5sum="89a692e0ae0ccc1a012559e5ea4d8a58" name="Mail.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -147,7 +147,7 @@ Updated minimum dependencies (Net_SMTP, PEAR, PHP)
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2010-02-09</date>
+   <date>2010-03-01</date>
    <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
    <notes>
 QA release - stable.
@@ -156,7 +156,7 @@ Updated minimum dependencies (Net_SMTP, PEAR, PHP)
 Doc Bug #15620 Licence change to BSD
 Bug #13659 Mail parse error in special condition
 Bug #16200 - Security hole allow to read/write Arbitrary File
-_hasUnclosedQuotes() doesn't properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
+_hasUnclosedQuotes() doesn&apos;t properly handle a double slash before an end quote (slusarz@curecanti.org, Bug #9137).
 Make sure Net_SMTP is defined when calling getSMTPObject() directly (slusarz@curecanti.org, Bug #13772).
 Add addServiceExtensionParameter() to the SMTP driver (slusarz@curecanti.org, Bug #13764).
 Add a method to obtain the Net_SMTP object from the SMTP driver (slusarz@curecanti.org, Bug #13766).
