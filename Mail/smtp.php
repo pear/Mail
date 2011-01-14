@@ -348,7 +348,8 @@ class Mail_smtp extends Mail {
         include_once 'Net/SMTP.php';
         $this->_smtp = &new Net_SMTP($this->host,
                                      $this->port,
-                                     $this->localhost);
+                                     $this->localhost,
+                                     $this->pipelining);
 
         /* If we still don't have an SMTP object at this point, fail. */
         if (is_object($this->_smtp) === false) {
