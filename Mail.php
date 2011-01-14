@@ -250,7 +250,8 @@ class Mail
         // Parse recipients, leaving out all personal info. This is
         // for smtp recipients, etc. All relevant personal information
         // should already be in the headers.
-        $addresses = Mail_RFC822::parseAddressList($recipients, 'localhost', false);
+        $Mail_RFC822 = new Mail_RFC822();
+        $addresses = $Mail_RFC822->parseAddressList($recipients, 'localhost', false);
 
         // If parseAddressList() returned a PEAR_Error object, just return it.
         if (is_a($addresses, 'PEAR_Error')) {

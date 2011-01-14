@@ -39,6 +39,7 @@ Request #17888: Reduce peak memory usage when using the smtp/smtpmx backend [ale
 Fixed Bug #18109: New "pipelining" parameter for SMTP backend never used [alec]
 Fixed Bug #17317: Invalid periods in mailbox not marked as invalid [alec]
 Fixed Bug #17388: Deprecated assigning the return value of new by reference [alec]
+Fixed Bug #17866: Non-static method Mail_RFC822::parseAddressList called statically [alec]
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
