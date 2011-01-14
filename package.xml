@@ -50,13 +50,13 @@ Fixed Bug #17866: Non-static method Mail_RFC822::parseAddressList called statica
    <file baseinstalldir="/" md5sum="b206391834f425f9a934b8f702b1847a" name="Mail/sendmail.php" role="php" />
    <file baseinstalldir="/" md5sum="479aa21ec86e63e629db646ed292b142" name="Mail/smtp.php" role="php" />
    <file baseinstalldir="/" md5sum="74e13bbc352601c9529c21e1e18f5b69" name="Mail/smtpmx.php" role="php" />
+   <file baseinstalldir="/" md5sum="89a692e0ae0ccc1a012559e5ea4d8a58" name="Mail.php" role="php" />
    <file baseinstalldir="/" md5sum="d66aa2a2f0bfe33f8a67d749a1a4d345" name="tests/9137.phpt" role="test" />
    <file baseinstalldir="/" md5sum="75d10361f686f1cc16637a9364e3eab7" name="tests/9137_2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="3659ceda2b94b66892869fa1ca12ada1" name="tests/13659.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="c2036980390981cd6b89c1e5c903913e" name="tests/bug17317.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bbd88a5dfb0536a8c66ba07a1fbda382" name="tests/rfc822.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="4c8cad5cc0e546afee8c5e9d06f2cf03" name="tests/smtp_error.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="fa4c53e482ff0c7af2bcbaffb090320c" name="tests/validateQuotedString.php" role="test" />
-   <file baseinstalldir="/" md5sum="89a692e0ae0ccc1a012559e5ea4d8a58" name="Mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="48a2349660b104b77ad9c42daac809c8" name="tests/smtp_error.phpt" role="test" />
   </dir>
  </contents>
  <dependencies>
