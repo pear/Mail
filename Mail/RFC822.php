@@ -483,14 +483,6 @@ class Mail_RFC822 {
             $addresses[] = $address['address'];
         }
 
-        // Check that $addresses is set, if address like this:
-        // Groupname:;
-        // Then errors were appearing.
-        if (!count($addresses)){
-            $this->error = 'Empty group.';
-            return false;
-        }
-
         // Trim the whitespace from all of the address strings.
         array_map('trim', $addresses);
 

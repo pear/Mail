@@ -40,6 +40,7 @@ Fixed Bug #18109: New "pipelining" parameter for SMTP backend never used [alec]
 Fixed Bug #17317: Invalid periods in mailbox not marked as invalid [alec]
 Fixed Bug #17388: Deprecated assigning the return value of new by reference [alec]
 Fixed Bug #17866: Non-static method Mail_RFC822::parseAddressList called statically [alec]
+Fixed Bug #17178: Mail_RFC822::parseAddressList does not accept RFC-valid empty-group syntax [alec]
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -54,6 +55,7 @@ Fixed Bug #17866: Non-static method Mail_RFC822::parseAddressList called statica
    <file baseinstalldir="/" md5sum="d66aa2a2f0bfe33f8a67d749a1a4d345" name="tests/9137.phpt" role="test" />
    <file baseinstalldir="/" md5sum="75d10361f686f1cc16637a9364e3eab7" name="tests/9137_2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="3659ceda2b94b66892869fa1ca12ada1" name="tests/13659.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="e99f00d8f07232e0f129dd77ae9699c7" name="tests/bug17178.phpt" role="test" />
    <file baseinstalldir="/" md5sum="c2036980390981cd6b89c1e5c903913e" name="tests/bug17317.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bbd88a5dfb0536a8c66ba07a1fbda382" name="tests/rfc822.phpt" role="test" />
    <file baseinstalldir="/" md5sum="48a2349660b104b77ad9c42daac809c8" name="tests/smtp_error.phpt" role="test" />
