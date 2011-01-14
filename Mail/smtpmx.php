@@ -386,7 +386,7 @@ class Mail_smtpmx extends Mail {
             }
 
             // Send data
-            $res = $this->_smtp->data("$textHeaders\r\n$body");
+            $res = $this->_smtp->data($body, $textHeaders);
             if (is_a($res, 'PEAR_Error')) {
                 $info = array('rcpt' => $rcpt);
                 return $this->_raiseError('failed_send_data', $info);
