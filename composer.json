@@ -1,0 +1,44 @@
+{
+    "authors": [
+        {
+            "email": "chuck@horde.org",
+            "name": "Chuck Hagenbuch",
+            "role": "Lead"
+        },
+        {
+            "email": "richard@phpguru.org",
+            "name": "Richard Heyes",
+            "role": "Developer"
+        },
+        {
+            "email": "alec@alec.pl",
+            "name": "Aleksander Machniak",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Mail": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/Mail",
+    "include-path": [
+        "./"
+    ],
+    "license": "BSD-2-Clause",
+    "name": "pear/mail",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Mail",
+        "source": "https://github.com/pear/Mail"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "suggest": {
+        "pear/net_smtp": "Install optionally via your project's composer.json"
+    }
+}
