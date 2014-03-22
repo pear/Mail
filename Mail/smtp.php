@@ -162,6 +162,8 @@ class Mail_smtp extends Mail {
      * @var bool
      */
     var $pipelining;
+    
+    var $socket_options = array();
 
     /**
      * Constructor.
@@ -200,7 +202,7 @@ class Mail_smtp extends Mail {
         if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
         if (isset($params['persist'])) $this->persist = (bool)$params['persist'];
         if (isset($params['pipelining'])) $this->pipelining = (bool)$params['pipelining'];
-
+	if (isset($params['socket_options'])) $this->socket_options = $params['socket_options'];
         // Deprecated options
         if (isset($params['verp'])) {
             $this->addServiceExtensionParameter('XVERP', is_bool($params['verp']) ? null : $params['verp']);
@@ -349,7 +351,9 @@ class Mail_smtp extends Mail {
         $this->_smtp = new Net_SMTP($this->host,
                                      $this->port,
                                      $this->localhost,
-                                     $this->pipelining);
+                                     $this->pipelining,
+                                     0,
+                                     $this->socket_options);
 
         /* If we still don't have an SMTP object at this point, fail. */
         if (is_object($this->_smtp) === false) {
