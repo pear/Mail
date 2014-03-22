@@ -22,8 +22,8 @@
   <email>alec@alec.pl</email>
   <active>yes</active>
  </developer>
- <date></date>
- <time></time>
+ <date>2014-01-01</date>
+ <time>00:00:00</time>
  <version>
   <release>1.2.1</release>
   <api>1.2.0</api>
