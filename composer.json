@@ -21,7 +21,8 @@
             "Mail": "./"
         }
     },
-    "description": "More info available on: http://pear.php.net/package/Mail",
+    "description": "Class that provides multiple interfaces for sending emails.",
+    "homepage": "http://pear.php.net/package/Mail",
     "include-path": [
         "./"
     ],
@@ -33,10 +34,10 @@
     },
     "type": "library",
     "require": {
-        "pear/pear": "*"
+        "pear/pear-core-minimal": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "pear/pear": "*"
     },
     "suggest": {
         "pear/net_smtp": "Install optionally via your project's composer.json"
