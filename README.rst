@@ -15,7 +15,12 @@ Currently supported backends include:
 
 This package also provides a `RFC 822`__ email address list validation utility class.
 
+Use Mail in combination with `Mail_Mime`__ to send HTML emails or emails with
+attachments - have a look at the example__.
+
 __ https://tools.ietf.org/html/rfc822
+__ http://pear.php.net/package/Mail_Mime
+__ http://pear.php.net/manual/en/package.mail.mail-mime.example.php
 
 ============
 Installation
