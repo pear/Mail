@@ -4,7 +4,7 @@ Mail_RFC822: Address Parsing
 <?php
 require_once 'Mail/RFC822.php';
 
-$parser = &new Mail_RFC822();
+$parser = new Mail_RFC822();
 
 /* A simple, bare address. */
 $address = 'user@example.com';

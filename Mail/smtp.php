@@ -208,7 +208,7 @@ class Mail_smtp extends Mail {
             $this->addServiceExtensionParameter('XVERP', is_bool($params['verp']) ? null : $params['verp']);
         }
 
-        register_shutdown_function(array(&$this, '_Mail_smtp'));
+        register_shutdown_function(array($this, '_Mail_smtp'));
     }
 
     /**
@@ -247,7 +247,7 @@ class Mail_smtp extends Mail {
     function send($recipients, $headers, $body)
     {
         /* If we don't already have an SMTP object, create one. */
-        $result = &$this->getSMTPObject();
+        $result = $this->getSMTPObject();
         if (PEAR::isError($result)) {
             return $result;
         }
@@ -341,7 +341,7 @@ class Mail_smtp extends Mail {
      * @since  1.2.0
      * @access public
      */
-    function &getSMTPObject()
+    function getSMTPObject()
     {
         if (is_object($this->_smtp) !== false) {
             return $this->_smtp;
@@ -435,7 +435,7 @@ class Mail_smtp extends Mail {
      * @since  1.1.7
      * @access private
      */
-    function _error($text, &$error)
+    function _error($text, $error)
     {
         /* Split the SMTP response into a code and a response string. */
         list($code, $response) = $this->_smtp->getResponse();
