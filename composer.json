@@ -34,6 +34,7 @@
     },
     "type": "library",
     "require": {
+        "php": ">=5.2.1",
         "pear/pear-core-minimal": "*"
     },
     "require-dev": {
