@@ -813,7 +813,7 @@ class Mail_RFC822 {
      */
     protected function _validateDliteral($dliteral)
     {
-        return !preg_match('/(.)[][\x0D\\\\]/', $dliteral, $matches) && $matches[1] != '\\';
+        return !preg_match('/(.)[][\x0D\\\\]/', $dliteral, $matches) && ((! isset($matches[1])) || $matches[1] != '\\');
     }
 
     /**
