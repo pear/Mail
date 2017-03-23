@@ -84,18 +84,21 @@ class Mail_smtp extends Mail {
     /**
      * The list of service extension parameters to pass to the Net_SMTP
      * mailFrom() command.
+     *
      * @var array
      */
     var $_extparams = array();
 
     /**
      * The SMTP host to connect to.
+     *
      * @var string
      */
     var $host = 'localhost';
 
     /**
      * The port the SMTP server is on.
+     *
      * @var integer
      */
     var $port = 25;
@@ -115,12 +118,14 @@ class Mail_smtp extends Mail {
 
     /**
      * The username to use if the SMTP server requires authentication.
+     *
      * @var string
      */
     var $username = '';
 
     /**
      * The password to use if the SMTP server requires authentication.
+     *
      * @var string
      */
     var $password = '';
@@ -159,10 +164,16 @@ class Mail_smtp extends Mail {
      * Use SMTP command pipelining (specified in RFC 2920) if the SMTP server
      * supports it. This speeds up delivery over high-latency connections. By
      * default, use the default value supplied by Net_SMTP.
-     * @var bool
+     *
+     * @var boolean
      */
     var $pipelining;
-    
+
+    /**
+     * The list of socket options
+     *
+     * @var array
+     */
     var $socket_options = array();
 
     /**
@@ -303,15 +314,15 @@ class Mail_smtp extends Mail {
 
         /* Send the message's headers and the body as SMTP data. */
         $res = $this->_smtp->data($body, $textHeaders);
-		list(,$args) = $this->_smtp->getResponse();
+        list(,$args) = $this->_smtp->getResponse();
 
-		if (preg_match("/Ok: queued as (.*)/", $args, $queued)) {
-			$this->queued_as = $queued[1];
-		}
+        if (preg_match("/Ok: queued as (.*)/", $args, $queued)) {
+            $this->queued_as = $queued[1];
+        }
 
-		/* we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
-		 * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email */
-		$this->greeting = $this->_smtp->getGreeting();
+        /* we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
+         * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email */
+        $this->greeting = $this->_smtp->getGreeting();
 
         if (is_a($res, 'PEAR_Error')) {
             $error = $this->_error('Failed to send data', $res);
