@@ -53,21 +53,21 @@ Fixed bugs:
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="311d8e436af49b7c07e6267811aa7ef0" name="Mail/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="374f3c31edbe16f9c3e869a0c501a03b" name="Mail/mock.php" role="php" />
-   <file baseinstalldir="/" md5sum="08dcb2a63e14dd967443c142182c1236" name="Mail/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="4b464d31823e9b33949ac8b9970f87fc" name="Mail/RFC822.php" role="php" />
-   <file baseinstalldir="/" md5sum="01f6d47000e9a522fdeca4f00e74ca72" name="Mail/sendmail.php" role="php" />
-   <file baseinstalldir="/" md5sum="ad4480e29855a1b615ed412bc3d23073" name="Mail/smtp.php" role="php" />
-   <file baseinstalldir="/" md5sum="27376683d563ea16330866d5b8bea7e9" name="Mail/smtpmx.php" role="php" />
-   <file baseinstalldir="/" md5sum="c610cf314991e4d4ee82c6f4fd2e0fde" name="Mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="d66aa2a2f0bfe33f8a67d749a1a4d345" name="tests/9137.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="75d10361f686f1cc16637a9364e3eab7" name="tests/9137_2.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="73cec53118175c9bc1f487c70f8b86dc" name="tests/13659.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="e99f00d8f07232e0f129dd77ae9699c7" name="tests/bug17178.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="c2036980390981cd6b89c1e5c903913e" name="tests/bug17317.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="7b0eae971fe7595e7c1a563fbfcfee90" name="tests/rfc822.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="67becdb1027cefcb8dff1b691da630ab" name="tests/smtp_error.phpt" role="test" />
+   <file baseinstalldir="/" name="Mail/mail.php" role="php" />
+   <file baseinstalldir="/" name="Mail/mock.php" role="php" />
+   <file baseinstalldir="/" name="Mail/null.php" role="php" />
+   <file baseinstalldir="/" name="Mail/RFC822.php" role="php" />
+   <file baseinstalldir="/" name="Mail/sendmail.php" role="php" />
+   <file baseinstalldir="/" name="Mail/smtp.php" role="php" />
+   <file baseinstalldir="/" name="Mail/smtpmx.php" role="php" />
+   <file baseinstalldir="/" name="Mail.php" role="php" />
+   <file baseinstalldir="/" name="tests/9137.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/9137_2.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/13659.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/bug17178.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/bug17317.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/rfc822.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/smtp_error.phpt" role="test" />
   </dir>
  </contents>
  <dependencies>
