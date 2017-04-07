@@ -8,13 +8,13 @@
   <name>Chuck Hagenbuch</name>
   <user>chagenbu</user>
   <email>chuck@horde.org</email>
-  <active>yes</active>
+  <active>no</active>
  </lead>
  <developer>
   <name>Richard Heyes</name>
   <user>richard</user>
   <email>richard@phpguru.org</email>
-  <active>yes</active>
+  <active>no</active>
  </developer>
  <developer>
   <name>Aleksander Machniak</name>
@@ -22,37 +22,24 @@
   <email>alec@alec.pl</email>
   <active>yes</active>
  </developer>
- <date>2016-01-31</date>
- <time>21:00:00</time>
+ <date>2017-04-07</date>
  <version>
-  <release>1.3.0</release>
+  <release>1.4.0</release>
   <api>1.3.0</api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
- <license uri="http://www.opensource.org/licenses/bsd-license.php">BSD Style</license>
+ <license uri="https://opensource.org/licenses/BSD-3-Clause">New BSD License</license>
  <notes>
-Added composer support.
+Clarified licensing to "New BSD" (3-Clause BSD)
 
-Added Travis CI test support.
-
-Updated code to use PHP 5 method signatures.
-
-Implemented requests:
- * #17888, #17865: Reduce peak memory usage when using the smtp/smtpmx backend [alec]
- * Ability to pass socket options to Net_SMTP
-
-Fixed bugs:
- * #18109: New "pipelining" parameter for SMTP backend never used [alec]
- * #17317: Invalid periods in mailbox not marked as invalid [alec]
- * #17388: Deprecated assigning the return value of new by reference [alec]
- * #17866, #20424, #12071, #17553: Non-static method Mail_RFC822::parseAddressList called statically [alec]
- * #17178: Mail_RFC822::parseAddressList does not accept RFC-valid empty-group syntax [alec]
+* Bug #21082: Inconsistent licensing
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
+   <file baseinstalldir="/" name="LICENSE" role="doc" />
    <file baseinstalldir="/" name="Mail/mail.php" role="php" />
    <file baseinstalldir="/" name="Mail/mock.php" role="php" />
    <file baseinstalldir="/" name="Mail/null.php" role="php" />
