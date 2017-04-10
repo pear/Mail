@@ -1,15 +1,19 @@
 language: php
 sudo: false
-install:
-  - pear install package.xml
-  - pear install net_smtp
 php:
-  - 5.2
-  - 5.3
   - 5.4
   - 5.5
   - 5.6
-  - 7
+  - 7.0
+  - 7.1
+  - nightly
+install:
+  - pear list
+  - pear channel-update pear.php.net
+  - pear upgrade --force pear/pear
+  - pear list
+  - pear upgrade --force xml_util
+  - pear install --force --alldeps package.xml
+  - pear list
 script:
-  - pear run-tests tests
-  - for i in `ls tests/*.diff`; do echo $i; cat $i; done
+  - pear run-tests -d tests/
