@@ -255,6 +255,18 @@ class Mail_smtp extends Mail {
      */
     public function send($recipients, $headers, $body)
     {
+        $result = $this->send_or_fail($recipients, $headers, $body);
+
+        /* If persistent connections are disabled, destroy our SMTP object. */
+        if ($this->persist === false) {
+            $this->disconnect();
+        }
+
+        return $result;
+    }
+
+    protected function send_or_fail($recipients, $headers, $body)
+    {
         /* If we don't already have an SMTP object, create one. */
         $result = $this->getSMTPObject();
         if (PEAR::isError($result)) {
@@ -330,11 +342,6 @@ class Mail_smtp extends Mail {
             $error = $this->_error('Failed to send data', $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_DATA);
-        }
-
-        /* If persistent connections are disabled, destroy our SMTP object. */
-        if ($this->persist === false) {
-            $this->disconnect();
         }
 
         return true;
