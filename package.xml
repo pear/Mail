@@ -22,9 +22,9 @@
   <email>alec@alec.pl</email>
   <active>yes</active>
  </developer>
- <date>2017-04-07</date>
+ <date>2017-04-11</date>
  <version>
-  <release>1.4.0</release>
+  <release>1.4.1</release>
   <api>1.3.0</api>
  </version>
  <stability>
@@ -33,9 +33,10 @@
  </stability>
  <license uri="https://opensource.org/licenses/BSD-3-Clause">New BSD License</license>
  <notes>
-Clarified licensing to "New BSD" (3-Clause BSD)
+* Loosen recognition of "queued as" server response (PR #10)
 
-* Bug #21082: Inconsistent licensing
+* Bug #20463: domain-literal parsing error
+* Bug #20513: Mail_smtp::send() doesn't close socket for smtp connection
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
