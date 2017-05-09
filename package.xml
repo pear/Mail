@@ -56,6 +56,7 @@
    <file baseinstalldir="/" name="tests/bug17317.phpt" role="test" />
    <file baseinstalldir="/" name="tests/rfc822.phpt" role="test" />
    <file baseinstalldir="/" name="tests/smtp_error.phpt" role="test" />
+   <file baseinstalldir="/" name="tests/validateQuotedString.phpt" role="test" />
   </dir>
  </contents>
  <dependencies>
