@@ -106,6 +106,18 @@ class Mail_smtp extends Mail {
     var $port = 25;
 
     /**
+     * Should STARTTLS connection be used?
+     *
+     * This value may be set to true or false.
+     *
+     * If the value is set to true, the Net_SMTP package will attempt to use
+     * a STARTTLS encrypted connection.
+     *
+     * @var boolean
+     */
+    var $starttls = false;
+
+    /**
      * Should SMTP authentication be used?
      *
      * This value may be set to true, false or the name of a specific
@@ -207,6 +219,7 @@ class Mail_smtp extends Mail {
         if (isset($params['host'])) $this->host = $params['host'];
         if (isset($params['port'])) $this->port = $params['port'];
         if (isset($params['auth'])) $this->auth = $params['auth'];
+        if (isset($params['starttls'])) $this->starttls = $params['starttls'];
         if (isset($params['username'])) $this->username = $params['username'];
         if (isset($params['password'])) $this->password = $params['password'];
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
@@ -400,6 +413,16 @@ class Mail_smtp extends Mail {
                                        $res);
                 $this->_smtp->rset();
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
+            }
+        }
+        
+        /* Attempt to establishe a TLS encrypted connection. */
+        if ($this->starttls && $this->auth === False) {
+            $starttls = $this->_smtp->starttls();
+            if(PEAR::isError($starttls)){
+                return PEAR::raiseError($starttls);
+            } elseif($starttls === False){
+                return PEAR::raiseError('STARTTLS failed');
             }
         }
 
