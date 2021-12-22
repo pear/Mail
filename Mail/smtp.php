@@ -113,11 +113,16 @@ class Mail_smtp extends Mail {
      * If the value is set to true, the Net_SMTP package will attempt to use
      * a STARTTLS encrypted connection.
      * 
+     * If the value is set to false, the Net_SMTP package will avoid
+     * a STARTTLS encrypted connection.
+     * 
+     * NULL indicates only STARTTLS if $auth is set.
+     * 
      * PEAR/Net_SMTP >= 1.10.0 required.
      *
      * @var boolean
      */
-    var $starttls = false;
+    var $starttls = null;
 
     /**
      * Should SMTP authentication be used?
@@ -408,10 +413,13 @@ class Mail_smtp extends Mail {
         /* Attempt to authenticate if authentication has been enabled. */
         if ($this->auth) {
             $method = is_string($this->auth) ? $this->auth : '';
+            
+            $tls = $this->starttls === false ? false : true;
 
             if (PEAR::isError($res = $this->_smtp->auth($this->username,
                                                         $this->password,
-                                                        $method))) {
+                                                        $method,
+                                                        $tls))) {
                 $error = $this->_error("$method authentication failure",
                                        $res);
                 $this->_smtp->rset();
