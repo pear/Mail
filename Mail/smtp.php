@@ -6,7 +6,7 @@
  *
  * LICENSE:
  *
- * Copyright (c) 2010-2017, Chuck Hagenbuch & Jon Parise
+ * Copyright (c) 2010-2021, Chuck Hagenbuch & Jon Parise
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
  * @package     HTTP_Request
  * @author      Jon Parise <jon@php.net> 
  * @author      Chuck Hagenbuch <chuck@horde.org>
- * @copyright   2010-2017 Chuck Hagenbuch
+ * @copyright   2010-2021 Chuck Hagenbuch
  * @license     http://opensource.org/licenses/BSD-3-Clause New BSD License
  * @version     CVS: $Id$
  * @link        http://pear.php.net/package/Mail/
@@ -112,6 +112,8 @@ class Mail_smtp extends Mail {
      *
      * If the value is set to true, the Net_SMTP package will attempt to use
      * a STARTTLS encrypted connection.
+     * 
+     * PEAR/Net_SMTP >= 1.10.0 required.
      *
      * @var boolean
      */
@@ -197,7 +199,8 @@ class Mail_smtp extends Mail {
      * passed in. It looks for the following parameters:
      *     host        The server to connect to. Defaults to localhost.
      *     port        The port to connect to. Defaults to 25.
-     *     auth        SMTP authentication.  Defaults to none.
+     *     auth        SMTP authentication. Defaults to none.
+     *     starttls    Should STARTTLS connection be used? Defaults to false. PEAR/Net_SMTP >= 1.10.0 required.
      *     username    The username to use for SMTP auth. No default.
      *     password    The password to use for SMTP auth. No default.
      *     localhost   The local hostname / domain. Defaults to localhost.
@@ -416,12 +419,12 @@ class Mail_smtp extends Mail {
             }
         }
         
-        /* Attempt to establishe a TLS encrypted connection. */
-        if ($this->starttls && $this->auth === False) {
+        /* Attempt to establish a TLS encrypted connection. PEAR/Net_SMTP >= 1.10.0 required. */
+        if ($this->starttls && !$this->auth) {
             $starttls = $this->_smtp->starttls();
-            if(PEAR::isError($starttls)){
+            if (PEAR::isError($starttls)) {
                 return PEAR::raiseError($starttls);
-            } elseif($starttls === False){
+            } elseif ($starttls === false) {
                 return PEAR::raiseError('STARTTLS failed');
             }
         }
