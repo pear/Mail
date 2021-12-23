@@ -205,7 +205,7 @@ class Mail_smtp extends Mail {
      *     host        The server to connect to. Defaults to localhost.
      *     port        The port to connect to. Defaults to 25.
      *     auth        SMTP authentication. Defaults to none.
-     *     starttls    Should STARTTLS connection be used? Defaults to false. PEAR/Net_SMTP >= 1.10.0 required.
+     *     starttls    Should STARTTLS connection be used? No default. PEAR/Net_SMTP >= 1.10.0 required.
      *     username    The username to use for SMTP auth. No default.
      *     password    The password to use for SMTP auth. No default.
      *     localhost   The local hostname / domain. Defaults to localhost.
