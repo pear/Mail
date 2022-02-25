@@ -299,13 +299,13 @@ class Mail_smtp extends Mail {
                                     PEAR_MAIL_SMTP_ERROR_FROM);
         }
 
-        $params = null;
+        $params = '';
         if (!empty($this->_extparams)) {
             foreach ($this->_extparams as $key => $val) {
                 $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
             }
         }
-        if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params ?? '')))) {
+        if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params)))) {
             $error = $this->_error("Failed to set sender: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
