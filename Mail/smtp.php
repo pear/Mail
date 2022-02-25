@@ -38,7 +38,7 @@
  *
  * @category    HTTP
  * @package     HTTP_Request
- * @author      Jon Parise <jon@php.net> 
+ * @author      Jon Parise <jon@php.net>
  * @author      Chuck Hagenbuch <chuck@horde.org>
  * @copyright   2010-2017 Chuck Hagenbuch
  * @license     http://opensource.org/licenses/BSD-3-Clause New BSD License
@@ -305,7 +305,7 @@ class Mail_smtp extends Mail {
                 $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
             }
         }
-        if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params)))) {
+        if (PEAR::isError($res = $this->_smtp->mailFrom($from, ltrim($params ?? '')))) {
             $error = $this->_error("Failed to set sender: $from", $res);
             $this->_smtp->rset();
             return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_SENDER);
