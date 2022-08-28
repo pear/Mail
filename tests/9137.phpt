@@ -18,7 +18,8 @@ for ($i = 0; $i < count($addresses); $i++) {
     $address = "\"" . addslashes($addresses[$i]['name']) . "\" ".
         "<".$addresses[$i]['email'].">";
 
-    $parsedAddresses = Mail_RFC822::parseAddressList($address);
+    $parser = new Mail_RFC822();
+    $parsedAddresses = $parser->parseAddressList($address);
     if (is_a($parsedAddresses, 'PEAR_Error')) {
         echo $address." :: Failed to validate\n";
     } else {

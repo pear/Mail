@@ -60,7 +60,8 @@
  * How do I use it?
  *
  * $address_string = 'My Group: "Richard" <richard@localhost> (A comment), ted@example.com (Ted Bloggs), Barney;';
- * $structure = Mail_RFC822::parseAddressList($address_string, 'example.com', true)
+ * $parser = new Mail_RFC822();
+ * $structure = $parser->parseAddressList($address_string, 'example.com', true);
  * print_r($structure);
  *
  * @author  Richard Heyes <richard@phpguru.org>
@@ -172,11 +173,6 @@ class Mail_RFC822 {
      */
     public function parseAddressList($address = null, $default_domain = null, $nest_groups = null, $validate = null, $limit = null)
     {
-        if (!isset($this) || !isset($this->mailRFC822)) {
-            $obj = new Mail_RFC822($address, $default_domain, $nest_groups, $validate, $limit);
-            return $obj->parseAddressList();
-        }
-
         if (isset($address))        $this->address        = $address;
         if (isset($default_domain)) $this->default_domain = $default_domain;
         if (isset($nest_groups))    $this->nestGroups     = $nest_groups;
