@@ -6,6 +6,11 @@
             "role": "Lead"
         },
         {
+            "email": "schengawegga@gmail.com",
+            "name": "Armin Graefe",
+            "role": "Lead"
+        },
+        {
             "email": "richard@phpguru.org",
             "name": "Richard Heyes",
             "role": "Developer"
