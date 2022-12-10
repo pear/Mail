@@ -173,13 +173,14 @@ class Mail_smtp extends Mail {
      */
     var $debug = false;
 
-		/**
-		 * we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
-		 * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email
-		 *
-		 * @var string
-		 */
-		var $greeting = null;
+    /**
+     * we need the greeting; from it we can extract the authorative name of the mail
+     * server we've really connected to. ideal if we're connecting to a round-robin
+     * of relay servers and need to track which exact one took the email
+     *
+     * @var string
+     */
+    var $greeting = null;
 
     /**
      * Indicates whether or not the SMTP connection should persist over
