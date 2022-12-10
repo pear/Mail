@@ -112,12 +112,12 @@ class Mail_smtp extends Mail {
      *
      * If the value is set to true, the Net_SMTP package will attempt to use
      * a STARTTLS encrypted connection.
-     * 
+     *
      * If the value is set to false, the Net_SMTP package will avoid
      * a STARTTLS encrypted connection.
-     * 
+     *
      * NULL indicates only STARTTLS if $auth is set.
-     * 
+     *
      * PEAR/Net_SMTP >= 1.10.0 required.
      *
      * @var boolean
@@ -172,6 +172,14 @@ class Mail_smtp extends Mail {
      * @var boolean $debug
      */
     var $debug = false;
+
+		/**
+		 * we need the greeting; from it we can extract the authorative name of the mail server we've really connected to.
+		 * ideal if we're connecting to a round-robin of relay servers and need to track which exact one took the email
+		 *
+		 * @var string
+		 */
+		var $greeting = null;
 
     /**
      * Indicates whether or not the SMTP connection should persist over
@@ -413,7 +421,7 @@ class Mail_smtp extends Mail {
         /* Attempt to authenticate if authentication has been enabled. */
         if ($this->auth) {
             $method = is_string($this->auth) ? $this->auth : '';
-            
+
             $tls = $this->starttls === false ? false : true;
 
             if (PEAR::isError($res = $this->_smtp->auth($this->username,
@@ -426,7 +434,7 @@ class Mail_smtp extends Mail {
                 return PEAR::raiseError($error, PEAR_MAIL_SMTP_ERROR_AUTH);
             }
         }
-        
+
         /* Attempt to establish a TLS encrypted connection. PEAR/Net_SMTP >= 1.10.0 required. */
         if ($this->starttls && !$this->auth) {
             $starttls = $this->_smtp->starttls();
