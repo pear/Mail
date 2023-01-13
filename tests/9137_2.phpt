@@ -18,7 +18,8 @@ $addresses = array(
 for ($i = 0; $i < count($addresses); $i++) {
     // construct the address
     $address = $addresses[$i]['raw'];
-    $parsedAddresses = Mail_RFC822::parseAddressList($address);
+    $parser = new Mail_RFC822();
+    $parsedAddresses = $parser->parseAddressList($address);
     if (PEAR::isError($parsedAddresses)) {
         echo $address." :: Failed to validate\n";
     } else {
