@@ -38,7 +38,7 @@
  *
  * @category    HTTP
  * @package     HTTP_Request
- * @author      Jon Parise <jon@php.net> 
+ * @author      Jon Parise <jon@php.net>
  * @author      Chuck Hagenbuch <chuck@horde.org>
  * @copyright   2010-2021 Chuck Hagenbuch
  * @license     http://opensource.org/licenses/BSD-3-Clause New BSD License
@@ -320,7 +320,7 @@ class Mail_smtp extends Mail {
                                     PEAR_MAIL_SMTP_ERROR_FROM);
         }
 
-        $params = null;
+        $params = '';
         if (!empty($this->_extparams)) {
             foreach ($this->_extparams as $key => $val) {
                 $params .= ' ' . $key . (is_null($val) ? '' : '=' . $val);
