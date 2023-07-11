@@ -207,6 +207,19 @@ class Mail_smtp extends Mail {
     var $socket_options = array();
 
     /**
+     * If the message ends up in the queue, on the recipient server,
+     * the response will be saved here.
+     * Some successfully delivered emails will include a “queued”
+     * notation in the SMTP response, such as "250 OK; queued as 12345".
+     * This indicates that the email was delivered to the recipient
+     * as expected, but may require additional processing before it
+     * lands in the recipient’s inbox.
+     *
+     * @var string
+     */
+    var $queued_as = null;
+
+    /**
      * Constructor.
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
