@@ -174,6 +174,13 @@ class Mail_smtp extends Mail {
     var $debug = false;
 
     /**
+     * Set debug_handler on Net_SMTP
+     *
+     * @var string $debug_handler
+     */
+    var $debug_handler = null;
+
+    /**
      * we need the greeting; from it we can extract the authorative name of the mail
      * server we've really connected to. ideal if we're connecting to a round-robin
      * of relay servers and need to track which exact one took the email
@@ -211,19 +218,21 @@ class Mail_smtp extends Mail {
      *
      * Instantiates a new Mail_smtp:: object based on the parameters
      * passed in. It looks for the following parameters:
-     *     host        The server to connect to. Defaults to localhost.
-     *     port        The port to connect to. Defaults to 25.
-     *     auth        SMTP authentication. Defaults to none.
-     *     starttls    Should STARTTLS connection be used? No default. PEAR/Net_SMTP >= 1.10.0 required.
-     *     username    The username to use for SMTP auth. No default.
-     *     password    The password to use for SMTP auth. No default.
-     *     localhost   The local hostname / domain. Defaults to localhost.
-     *     timeout     The SMTP connection timeout. Defaults to none.
-     *     verp        Whether to use VERP or not. Defaults to false.
-     *                 DEPRECATED as of 1.2.0 (use setMailParams()).
-     *     debug       Activate SMTP debug mode? Defaults to false.
-     *     persist     Should the SMTP connection persist?
-     *     pipelining  Use SMTP command pipelining
+     *     host            The server to connect to. Defaults to localhost.
+     *     port            The port to connect to. Defaults to 25.
+     *     auth            SMTP authentication. Defaults to none.
+     *     starttls        Should STARTTLS connection be used? No default. PEAR/Net_SMTP >= 1.10.0 required.
+     *     username        The username to use for SMTP auth. No default.
+     *     password        The password to use for SMTP auth. No default.
+     *     localhost       The local hostname / domain. Defaults to localhost.
+     *     timeout         The SMTP connection timeout. Defaults to none.
+     *     verp            Whether to use VERP or not. Defaults to false.
+     *                     DEPRECATED as of 1.2.0 (use setMailParams()).
+     *     debug           Activate SMTP debug mode? Defaults to false.
+     *     debug_handler   Set SMTP debug handler function. Defaults to null.
+     *     persist         Should the SMTP connection persist?
+     *     pipelining      Use SMTP command pipelining
+     *     socket_options  Socket stream_context_create() options.
      *
      * If a parameter is present in the $params array, it replaces the
      * default.
@@ -242,6 +251,7 @@ class Mail_smtp extends Mail {
         if (isset($params['localhost'])) $this->localhost = $params['localhost'];
         if (isset($params['timeout'])) $this->timeout = $params['timeout'];
         if (isset($params['debug'])) $this->debug = (bool)$params['debug'];
+        if (isset($params['debug_handler'])) $this->debug_handler = $params['debug_handler'];
         if (isset($params['persist'])) $this->persist = (bool)$params['persist'];
         if (isset($params['pipelining'])) $this->pipelining = (bool)$params['pipelining'];
         if (isset($params['socket_options'])) $this->socket_options = $params['socket_options'];
@@ -408,7 +418,7 @@ class Mail_smtp extends Mail {
 
         /* Configure the SMTP connection. */
         if ($this->debug) {
-            $this->_smtp->setDebug(true);
+            $this->_smtp->setDebug(true, $this->debug_handler);
         }
 
         /* Attempt to connect to the configured SMTP server. */
