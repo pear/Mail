@@ -28,9 +28,9 @@
   <email>alec@alec.pl</email>
   <active>no</active>
  </developer>
- <date>2022-11-29</date>
+ <date>2023-08-08</date>
  <version>
-  <release>1.5.0</release>
+  <release>1.5.1</release>
   <api>1.3.0</api>
  </version>
  <stability>
@@ -39,8 +39,9 @@
  </stability>
  <license uri="https://opensource.org/licenses/BSD-3-Clause">New BSD License</license>
  <notes>
-  * New Feature: Establish STARTTLS connection without authentication (add new param 'starttls') #17
-  * BugFix: Del: deprecation warnings (PHP 8.1 E_DEPRECATED warnings when you provide null values) #20
+  * BugFix: Do not use parseAddressList statically #21
+  * BugFix: Dynamic properties deprecation (initialized several undefined variables) #22 #26
+  * BugFix: Problem with giving port to constructor in smtpmx.php #26
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
