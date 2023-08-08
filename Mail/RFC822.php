@@ -232,6 +232,9 @@ class Mail_RFC822 {
      */
     protected function _splitAddresses($address)
     {
+        $is_group = false;
+        $split_char = ',';
+
         if (!empty($this->limit) && count($this->addresses) == $this->limit) {
             return '';
         }
@@ -442,6 +445,7 @@ class Mail_RFC822 {
      */
     protected function _validateAddress($address)
     {
+        $structure = null;
         $is_group = false;
         $addresses = array();
 
@@ -619,6 +623,7 @@ class Mail_RFC822 {
         $phrase  = '';
         $comment = '';
         $comments = array();
+        $addr_spec = null;
 
         // Catch any RFC822 comments and store them separately.
         $_mailbox = $mailbox;
@@ -776,6 +781,7 @@ class Mail_RFC822 {
     {
         // Note the different use of $subdomains and $sub_domains
         $subdomains = explode('.', $domain);
+        $sub_domains = array();
 
         while (count($subdomains) > 0) {
             $sub_domains[] = $this->_splitCheck($subdomains, '.');
