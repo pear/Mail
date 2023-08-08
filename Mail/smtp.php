@@ -207,6 +207,14 @@ class Mail_smtp extends Mail {
     var $socket_options = array();
 
     /**
+     * SMTP response message
+     *
+     * @var string
+     * @since 1.6.0
+     */
+    var $response = null;
+
+    /**
      * If the message ends up in the queue, on the recipient server,
      * the response will be saved here.
      * Some successfully delivered emails will include a “queued”
@@ -371,9 +379,12 @@ class Mail_smtp extends Mail {
 
         /* Send the message's headers and the body as SMTP data. */
         $res = $this->_smtp->data($body, $textHeaders);
-        list(,$args) = $this->_smtp->getResponse();
 
-        if (preg_match("/ queued as (.*)/", $args, $queued)) {
+        list($code,$args) = $this->_smtp->getResponse();
+
+        $this->response = $code . ' ' . $args;
+
+        if (preg_match("/ queue (.*)| queued (.*)/i", $args, $queued)) {
             $this->queued_as = $queued[1];
         }
 
@@ -491,6 +502,28 @@ class Mail_smtp extends Mail {
 
         /* We are disconnected if we no longer have an SMTP object. */
         return ($this->_smtp === null);
+    }
+
+    /**
+     * Returns the SMTP response message after sending.
+     *
+     * @return string SMTP response message or NULL.
+     *
+     * @since  1.6.0
+     */
+    public function getResponse(){
+        return $this->response;
+    }
+
+    /**
+     * Returns the SMTP response message if includes "queue" after sending.
+     *
+     * @return string SMTP queue message or NULL.
+     *
+     * @since  1.6.0
+     */
+    public function getQueuedAs(){
+        return $this->queued_as;
     }
 
     /**
