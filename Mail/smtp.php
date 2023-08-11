@@ -380,11 +380,11 @@ class Mail_smtp extends Mail {
         /* Send the message's headers and the body as SMTP data. */
         $res = $this->_smtp->data($body, $textHeaders);
 
-        list($code,$args) = $this->_smtp->getResponse();
+        list($code, $args) = $this->_smtp->getResponse();
 
         $this->response = $code . ' ' . $args;
 
-        if (preg_match("/ queue (.*)| queued (.*)/i", $args, $queued)) {
+        if (preg_match("/ queued as (.*)/", $args, $queued)) {
             $this->queued_as = $queued[1];
         }
 
@@ -511,7 +511,8 @@ class Mail_smtp extends Mail {
      *
      * @since  1.6.0
      */
-    public function getResponse(){
+    public function getResponse()
+    {
         return $this->response;
     }
 
@@ -522,7 +523,8 @@ class Mail_smtp extends Mail {
      *
      * @since  1.6.0
      */
-    public function getQueuedAs(){
+    public function getQueuedAs()
+    {
         return $this->queued_as;
     }
 
