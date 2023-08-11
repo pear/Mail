@@ -176,7 +176,7 @@ class Mail_smtp extends Mail {
     /**
      * Set debug_handler on Net_SMTP
      *
-     * @var string $debug_handler
+     * @var callable $debug_handler
      */
     var $debug_handler = null;
 
