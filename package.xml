@@ -28,9 +28,9 @@
   <email>alec@alec.pl</email>
   <active>no</active>
  </developer>
- <date>2023-11-01</date>
+ <date>2024-01-15</date>
  <version>
-  <release>1.6.0</release>
+  <release>2.0.0</release>
   <api>1.4.0</api>
  </version>
  <stability>
@@ -39,9 +39,7 @@
  </stability>
  <license uri="https://opensource.org/licenses/BSD-3-Clause">New BSD License</license>
  <notes>
-  * Feature: Added new property $response and new methods getResponse and getQueuedAs #27 #29
-  * Feature: Added Net_SMTP debug_handler #28 #30
-  * BugFix: Fix whitespace removal from addresses #32
+  * BugFix: Use CRLF for header separation, except sendmail, fixes #23 #24
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
