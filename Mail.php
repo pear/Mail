@@ -46,6 +46,7 @@
  */
 
 require_once 'PEAR.php';
+include_once 'Mail/RFC822.php';
 
 /**
  * PEAR's Mail:: interface. Defines the interface for implementing
@@ -179,7 +180,6 @@ class Mail
 
         foreach ($headers as $key => $value) {
             if (strcasecmp($key, 'From') === 0) {
-                include_once 'Mail/RFC822.php';
                 $parser = new Mail_RFC822();
                 $addresses = $parser->parseAddressList($value, 'localhost', false);
                 if (is_a($addresses, 'PEAR_Error')) {
@@ -235,7 +235,6 @@ class Mail
      */
     protected function parseRecipients($recipients)
     {
-        include_once 'Mail/RFC822.php';
 
         // if we're passed an array, assume addresses are valid and
         // implode them before parsing.
