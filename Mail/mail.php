@@ -135,7 +135,16 @@ class Mail_mail extends Mail {
         if (is_a($headerElements, 'PEAR_Error')) {
             return $headerElements;
         }
-        list(, $text_headers) = $headerElements;
+        list($from, $text_headers) = $headerElements;
+
+        // Prefer the Return-Path header (if set) as the SMTP envelope
+        // sender, rather than silently falling back to the server default.
+        if (!empty($headers['Return-Path'])) {
+            $from = $headers['Return-Path'];
+        }
+        if (!empty($from)) {
+            $this->_params = '-f' . $from;
+        }
 
         // We only use mail()'s optional fifth parameter if the additional
         // parameters have been provided and we're not running in safe mode.
