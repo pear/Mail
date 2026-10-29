@@ -156,6 +156,13 @@ class Mail
                 preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i',
                              '', $value);
         }
+
+        // RFC 5322 requires an origination Date header, and some MTAs
+        // (e.g. qmail under local delivery) never add one themselves,
+        // leaving the message effectively undated.
+        if (!array_key_exists('Date', $headers)) {
+            $headers['Date'] = date('r');
+        }
     }
 
     /**
